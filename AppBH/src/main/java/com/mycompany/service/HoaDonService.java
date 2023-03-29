@@ -5,6 +5,7 @@
 package com.mycompany.service;
 
 import com.mycompany.conf.JdbcUtils;
+import com.mycompany.pojo.HoaDonBan;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +21,7 @@ import java.util.Date;
  */
 public class HoaDonService {
 
-    public static boolean addHoaDon(String MaNV, Date NgayBan, String MaKH, double TongTien, int IDChiNhanh) throws SQLException {
+    public static HoaDonBan addHoaDon(String MaNV, Date NgayBan, String MaKH, double TongTien, int IDChiNhanh) throws SQLException {
         try ( Connection conn = JdbcUtils.getConn()) {
             int dem = 1;
             Statement stm1 = conn.createStatement();
@@ -41,16 +42,16 @@ public class HoaDonService {
             stm.setString(6, Integer.toString(IDChiNhanh));
 
             int r = stm.executeUpdate();
-            return r > 0;
+            return new HoaDonBan(id,MaNV, NgayBan, MaKH, TongTien, IDChiNhanh);
         }
     }
 
-    public static boolean addHoaDonBan(String maHD, String MaHang, double SL, double DonGia, Double GiamGia, Double ThanhTien) throws SQLException {
+    public static boolean addHoaDonBan(HoaDonBan a, String MaHang, double SL, double DonGia, Double GiamGia, Double ThanhTien) throws SQLException {
         try ( Connection conn = JdbcUtils.getConn()) {
             String sql = "insert into tblchitiethdban values(?,?,?,?,?,?)";
             PreparedStatement stm = conn.prepareCall(sql);
 
-            stm.setString(1, maHD);
+            stm.setString(1, a.getMaHD());
             stm.setString(2, MaHang);
             stm.setString(3, Double.toString(SL));
             stm.setString(4, Double.toString(DonGia));

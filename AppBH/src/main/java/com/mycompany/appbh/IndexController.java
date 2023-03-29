@@ -12,6 +12,13 @@ import com.mycompany.service.HoaDonService;
 import com.mycompany.service.NhanVienService;
 import com.mycompany.service.SanPhamService;
 import com.mycompany.utils.MessageBox;
+import com.mycompany.appbh.App;
+import com.mycompany.appbh.PrimaryController;
+import com.mycompany.pojo.Hang;
+import com.mycompany.pojo.HoaDonBan;
+import com.mycompany.service.DonViTinhService;
+import com.mycompany.service.HoaDonService;
+import com.mycompany.utils.MessageBox;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -174,7 +181,7 @@ public class IndexController implements Initializable {
     }
     KhachHang select;
     NhanVien a;
-
+    List<Hang> items;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Date date = new Date();
@@ -199,8 +206,8 @@ public class IndexController implements Initializable {
             this.TenNV.setText(a.getTenNV());
             ChiNhanh b = ChiNhanhService.GetChiNhanhByID(Integer.toString(a.getIDChiNhanh()));
             this.ChiNhanh.setText(b.getDiaChi());
-
-            List<Hang> items = SanPhamService.GetSanPham();
+            items = SanPhamService.GetSanPham();
+            
             this.l.setItems(FXCollections.observableArrayList(items));
             this.content.setEditable(true);
 
@@ -263,10 +270,11 @@ public class IndexController implements Initializable {
         Optional<ButtonType> btn = a.showAndWait();
         if (btn.get() == ButtonType.APPLY) {
             if (c.listSanPham.getSelectionModel().getSelectedItem() != null) {
-                for (Hang i : itemInContent) {
-                    if (i.equals(c.listSanPham.getSelectionModel().getSelectedItem()));
-                    l.setValue(i);
-                    break;
+                for (Hang i : items) {
+                    if (i.getMaHang().equals(c.listSanPham.getSelectionModel().getSelectedItem().getMaHang())){
+                        l.setValue(i);
+                        break;
+                    }
                 }
             } else {
                 MessageBox.getBox("Cảnh báo", "Bạn chưa chọn sản phẩm!!",
@@ -337,6 +345,8 @@ public class IndexController implements Initializable {
                 break;
             }
         }
+        this.TienMat.setText("0");
+        this.thoi.setText("0");
         this.addListToTableView();
         update();
         this.content.refresh();
@@ -403,26 +413,38 @@ public class IndexController implements Initializable {
         }
     }
 
-    public void LuuHD() throws SQLException, IOException, InterruptedException {
+    public void LuuHD() throws SQLException, IOException, InterruptedException, Exception {
         LocalDate dateIns = this.NgayBan.getValue();
         Instant instant = Instant.from(dateIns.atStartOfDay(ZoneId.systemDefault()));
         Date NgayBanDate = Date.from(instant);
 
         try {
-            HoaDonService.addHoaDon(a.getMaNV(), NgayBanDate, select.getMaKhach(), Double.parseDouble(ThanhToan.getText()), a.getIDChiNhanh());
-            wait();
+            if(itemInContent.size() == 0) throw new Exception("Chưa có mặc hàng nào để thanh toán");
+            HoaDonBan currentHD = HoaDonService.addHoaDon(a.getMaNV(), NgayBanDate, select.getMaKhach(), Double.parseDouble(ThanhToan.getText()), a.getIDChiNhanh());
             for(Hang i: itemInContent){
-                HoaDonService.addHoaDonBan(this.MaHoaDon.getText(), i.getMaHang(), i.getSoLuongBan(), i.getDonGiaBan(), Double.parseDouble(Integer.toString(i.getGiaGiam())), i.getTongGiaTien());
+                HoaDonService.addHoaDonBan(currentHD, i.getMaHang(), i.getSoLuongBan(), i.getDonGiaBan(), Double.parseDouble(Integer.toString(i.getGiaGiam())), i.getTongGiaTien());
             }
             MessageBox.getBox("Thanh toán", "Thanh toán thành công!!!",
                     Alert.AlertType.INFORMATION).show();
+            App.setRoot("index");
         } catch (SQLException ex) {
             Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
             MessageBox.getBox("Thanh toán", "Thanh toán thất bại!!!",
                     Alert.AlertType.ERROR).show();
         }
+         catch (NullPointerException ex) {
+            Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
+            MessageBox.getBox("Thanh toán", "Chưa nhập khách hàng???!!!",
+                    Alert.AlertType.ERROR).show();
+        
+        } catch (Exception ex) {
+            Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
+            MessageBox.getBox("Thanh toán", ex.getMessage(),
+                    Alert.AlertType.ERROR).show();
+        }
+        
 
-        App.setRoot("index");
+        
     }
-
 }
+
