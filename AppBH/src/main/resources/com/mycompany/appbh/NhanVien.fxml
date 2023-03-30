@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="622.0" prefWidth="857.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.appbanhang.NhanVienController">
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="622.0" prefWidth="857.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.appbh.NhanVienController">
    <children>
       <MenuBar prefHeight="25.0" prefWidth="857.0" style="-fx-background-color: #00CCCC;">
          <menus>
@@ -126,7 +126,7 @@
       </HBox>
       <HBox prefHeight="300.0" prefWidth="859.0">
          <children>
-            <TableView fx:id="listNhanVien" prefHeight="300.0" prefWidth="858.0">
+            <TableView fx:id="listNhanVien" onMouseClicked="#g" prefHeight="300.0" prefWidth="858.0">
               <columns>
                 <TableColumn fx:id="id" prefWidth="75.0" text="Mã NV" />
                 <TableColumn fx:id="TenNhanVien" prefWidth="144.0" text="Tên" />
@@ -153,12 +153,12 @@
                         <Font name="Arial Bold" size="15.0" />
                      </font>
                   </Button>
-                  <Button layoutX="500.0" layoutY="18.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="67.0" text="Xóa">
+                  <Button layoutX="500.0" layoutY="18.0" mnemonicParsing="false" onAction="#deleteNhanVien" prefHeight="27.0" prefWidth="67.0" text="Xóa">
                      <font>
                         <Font name="Arial Bold" size="15.0" />
                      </font>
                   </Button>
-                  <Button layoutX="589.0" layoutY="18.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="67.0" text="Sửa">
+                  <Button layoutX="589.0" layoutY="18.0" mnemonicParsing="false" onAction="#UpdateNhanVien" prefHeight="27.0" prefWidth="67.0" text="Sửa">
                      <font>
                         <Font name="Arial Bold" size="15.0" />
                      </font>

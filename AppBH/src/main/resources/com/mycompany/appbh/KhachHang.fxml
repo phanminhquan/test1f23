@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -13,7 +14,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="622.0" prefWidth="857.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.appbanhang.KhachHangController">
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="622.0" prefWidth="857.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.appbh.KhachHangController">
    <children>
       <MenuBar prefHeight="25.0" prefWidth="857.0" style="-fx-background-color: #00CCCC;">
          <menus>
@@ -89,7 +90,7 @@
                      </font>
                   </Label>
                   <TextField fx:id="DiaChiText" layoutX="517.0" layoutY="2.0" prefHeight="25.0" prefWidth="333.0" />
-                  <TextField fx:id="DienThoaiText" layoutX="517.0" layoutY="44.0" prefHeight="25.0" prefWidth="216.0" />
+                  <TextField fx:id="DienThoaiText" layoutX="517.0" layoutY="44.0" prefHeight="25.0" prefWidth="132.0" />
                   <Button layoutX="375.0" layoutY="43.0" mnemonicParsing="false" onAction="#SeacrhCustomerByName" prefHeight="25.0" prefWidth="39.0" text="Tìm">
                      <font>
                         <Font name="Arial Bold" size="10.0" />
@@ -100,6 +101,12 @@
                         <Font name="Arial Bold" size="10.0" />
                      </font>
                   </Button>
+                  <DatePicker fx:id="NgaySinhKH" layoutX="658.0" layoutY="43.0" />
+                  <Label layoutX="693.0" layoutY="74.0" text="Ngày sinh">
+                     <font>
+                        <Font name="Arial Bold" size="14.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
          </children>
@@ -110,8 +117,9 @@
                <columns>
                   <TableColumn fx:id="MaKhach" prefWidth="95.0" text="Mã khách hàng" />
                   <TableColumn fx:id="TenKhach" prefWidth="331.0" text="Tên khách hàng" />
-                  <TableColumn fx:id="DiaChi" prefWidth="280.0" text="Địa chỉ" />
-                  <TableColumn fx:id="DienThoai" prefWidth="150.0" text="Số điện thoại" />
+                  <TableColumn fx:id="DiaChi" prefWidth="146.0" text="Địa chỉ" />
+                  <TableColumn fx:id="DienThoai" prefWidth="111.0" text="Số điện thoại" />
+                  <TableColumn fx:id="NgaySinh" prefWidth="174.0" text="Ngày sinh" />
                </columns>
             </TableView>
          </children>
