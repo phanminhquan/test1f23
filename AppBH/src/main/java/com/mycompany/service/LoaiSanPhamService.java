@@ -71,4 +71,28 @@ public class LoaiSanPhamService {
             return r >0;           
         }
     }
+    
+    public static boolean deleteLoaiSanPham(String ID) throws SQLException {
+        try (Connection conn = JdbcUtils.getConn()) {
+            String sql = "DELETE FROM tblloaisanpham WHERE MaLoaiSanPham =?";
+            PreparedStatement stm = conn.prepareCall(sql);
+            stm.setString(1, ID);
+            
+            int t = stm.executeUpdate();
+            
+            return t > 0;
+        }
+    }
+    
+    public static boolean updateLoaiSanPham(String Ma, String Ten ) throws SQLException{
+        
+        try(Connection conn = JdbcUtils.getConn()){
+            String sql = "update tblloaisanpham set TenLoaiSanPham = ? where MaLoaiSanPham = ?";
+            PreparedStatement stm = conn.prepareCall(sql);        
+            stm.setString(1,Ten);
+            stm.setString(2,Ma);
+            int r  = stm.executeUpdate();
+            return r >0;           
+        }
+    }
 }

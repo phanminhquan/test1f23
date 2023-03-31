@@ -30,6 +30,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 /**
  *
@@ -115,5 +116,54 @@ public class ChiNhanhController implements Initializable{
         App.setRoot("ChiNhanh");
         
         
+    }
+    
+    String IDTextBox = null;
+
+    @FXML
+    public void g(MouseEvent event) throws SQLException {
+        ChiNhanh a = this.listChiNhanh.getSelectionModel().getSelectedItem();
+        this.idChiNhanhText.setText(Integer.toString(a.getId()));
+        this.TenChiNhanhText.setText(a.getDiaChi());
+        IDTextBox = Integer.toString(a.getId());
+    }
+    public void deleteChiNhanh() throws IOException {
+        
+            try {
+                ChiNhanhService.deleteChiNhanh(this.idChiNhanhText.getText());
+                MessageBox.getBox("Chi Nhánh", "Xóa chi nhánh thành công!!!",
+                        Alert.AlertType.INFORMATION).show();
+            } catch (SQLException ex) {
+                Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
+                MessageBox.getBox("Chi Nhánh", "Xóa chi nhánh thất bại!!!",
+                        Alert.AlertType.ERROR).show();  
+            }
+            App.setRoot("ChiNhanh");
+
+    }
+    
+    public void UpdateChiNhanh() throws IOException {
+        try {
+            
+            String id = this.idChiNhanhText.getText();
+
+            if (id.equals(IDTextBox)) {
+                String name = this.TenChiNhanhText.getText();
+                int id1 = Integer.parseInt(id);
+                ChiNhanhService.updateChiNhanh(id1, name);
+                MessageBox.getBox("Chi nhánh", "Sửa chi nhánh thành công!!!",
+                        Alert.AlertType.INFORMATION).show();
+            } else {
+                MessageBox.getBox("Chi nhánh", " Không được sửa mã chi nhánh!!!",
+                        Alert.AlertType.ERROR).show();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
+            MessageBox.getBox("Chi nhánh", "Sửa chi nhánh thất bại!!!",
+                    Alert.AlertType.ERROR).show();
+
+        }
+        App.setRoot("ChiNhanh");
+
     }
 }

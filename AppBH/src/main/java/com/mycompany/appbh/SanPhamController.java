@@ -5,6 +5,10 @@
 package com.mycompany.appbh;
 
 import com.mycompany.pojo.Hang;
+import com.mycompany.pojo.KhuyenMai;
+import com.mycompany.pojo.LoaiSanPham;
+import com.mycompany.service.KhuyenMaiService;
+import com.mycompany.service.LoaiSanPhamService;
 import com.mycompany.service.SanPhamService;
 import com.mycompany.utils.MessageBox;
 import java.io.IOException;
@@ -22,16 +26,26 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 /**
  *
  * @author DELL
  */
 public class SanPhamController implements Initializable{
+    
+    
+    @FXML
+    private ComboBox<LoaiSanPham> ListLoaiSanPham;
+    @FXML
+    private ComboBox<KhuyenMai> ListKhuyenMai;
+    
+    
     @FXML
     public TableView<Hang> listSanPham;
     
@@ -136,6 +150,10 @@ public class SanPhamController implements Initializable{
             this.IdKhuyenMai.setCellValueFactory(new PropertyValueFactory<Hang,Integer>("IdKhuyenMai"));
             this.DonViTinh.setCellValueFactory(new PropertyValueFactory<Hang,Integer>("DonViTinh"));
             this.listSanPham.setItems(FXCollections.observableArrayList(hang));
+            List<LoaiSanPham> loaiSanPhamList = LoaiSanPhamService.GetLoaiSanPham();
+            this.ListLoaiSanPham.setItems(FXCollections.observableArrayList(loaiSanPhamList));
+//            List<KhuyenMai> KhuyenMaiList = KhuyenMaiService.KhuyenMaiByID();
+            this.ListLoaiSanPham.setItems(FXCollections.observableArrayList(loaiSanPhamList));
         } catch (SQLException ex) {
             Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -178,13 +196,13 @@ public class SanPhamController implements Initializable{
     
     public void addSanPham() throws IOException{
         String TenHang = this.TenHangText.getText();
-        String MaLoaiSanPham = this.MaLoaiSanPhamText.getText();
+        String MaLoaiSanPham = ListLoaiSanPham.getSelectionModel().getSelectedItem().getMaLoaiSanPham();
         double SoLuong = Double.parseDouble(this.SoLuongText.getText());
         double DonGiaNhap = Double.parseDouble(this.DongiaNhapText.getText());
         double DonGiaBan = Double.parseDouble(this.DonGiaBanText.getText());
         String Anh = this.AnhText.getText();
         String GhiChu = this.GhiChuText.getText();
-        int IdKhuyenMai = Integer.parseInt(this.IdKhuyenMaiText.getText());
+        int IdKhuyenMai = ListKhuyenMai.getSelectionModel().getSelectedItem().getID();
         int DonViTinh = Integer.parseInt(this.DonViTinhText.getText());     
         SanPhamService s = new SanPhamService();
         try {
@@ -197,7 +215,74 @@ public class SanPhamController implements Initializable{
                     Alert.AlertType.ERROR).show();
         }
         App.setRoot("SanPham");
-        
-        
     }
+    
+    String IDTextBox = null;
+
+    @FXML
+    public void g(MouseEvent event) throws SQLException {
+        Hang a = this.listSanPham.getSelectionModel().getSelectedItem();
+        this.MaHangText.setText(a.getMaHang());
+        this.TenHangText.setText(a.getTenHang());
+        this.SoLuongText.setText(Double.toString(a.getSoLuong()));
+        this.DongiaNhapText.setText(Double.toString(a.getDonGiaNhap()));
+        this.DonGiaBanText.setText(Double.toString(a.getDonGiaBan()));
+        this.AnhText.setText(a.getAnh());
+        this.GhiChuText.setText(a.getGhiChu());
+        this.DonViTinhText.setText(Integer.toString(a.getDonViTinh()));
+        this.ListLoaiSanPham.setValue(LoaiSanPhamService.GetLoaiSanPhamByID(a.getMaLoaiSanPham()).get(0));
+    }
+//
+//    public void UpdateNhanVien() throws IOException {
+//        try {
+//
+//            String id = this.idNhanVien.getText();
+//
+//            if (id.equals(IDTextBox)) {
+//                String sdt = this.SoDienThoaihText.getText();
+//                String name = this.nameNhanVien.getText();
+//                String GioiTinh = this.GioiTinhText.getText();
+//                String DiaChi = this.DiaChiText.getText();
+//                LocalDate dateIns = this.NgaySinhText.getValue();
+//                Instant instant = Instant.from(dateIns.atStartOfDay(ZoneId.systemDefault()));
+//                Date NgaySinh = Date.from(instant);
+//                int idChiNhanh = ListChiNhanh.getSelectionModel().getSelectedItem().getId();
+//                NhanVienService.updateNhanVien(id, name, GioiTinh, DiaChi, sdt, NgaySinh, idChiNhanh);
+//                MessageBox.getBox("Nhân viên", "Sửa nhân viên thành công!!!",
+//                        Alert.AlertType.INFORMATION).show();
+//            } else {
+//                MessageBox.getBox("Nhân viên", " Không được sửa mã nhân viên!!!",
+//                        Alert.AlertType.ERROR).show();
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
+//            MessageBox.getBox("Nhân viên", "Sửa nhân viên thất bại!!!",
+//                    Alert.AlertType.ERROR).show();
+//
+//        }
+//        App.setRoot("NhanVien");
+//
+//    }
+//
+//    public void deleteNhanVien() throws IOException {
+//        String IdNhanVienDel = this.idNhanVien.getText();
+//
+//        if (!UserSession.getUserID().trim().toLowerCase().equals(IdNhanVienDel.trim().toLowerCase())) {
+//            try {
+//                NhanVienService.deleteNhanVien(this.idNhanVien.getText());
+//                MessageBox.getBox("Nhân viên", "Xóa nhân viên thành công!!!",
+//                        Alert.AlertType.INFORMATION).show();
+//            } catch (SQLException ex) {
+//                Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
+//                MessageBox.getBox("Nhân viên", "Xóa nhân viên thất bại!!!",
+//                        Alert.AlertType.ERROR).show();
+//                ;
+//            }
+//            App.setRoot("NhanVien");
+//
+//        } else {
+//            MessageBox.getBox("Nhân viên", "Không được xóa nhân viên mà đang đăng nhập!!!",
+//                    Alert.AlertType.ERROR).show();
+//        }
+//    }
 }

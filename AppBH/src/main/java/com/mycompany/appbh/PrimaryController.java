@@ -37,12 +37,15 @@ public class PrimaryController {
      private void switchToIndex() throws IOException, SQLException {
          String id = txtA.getText();
          String pw = txtB.getText();
-         if(NhanVienService.Login(id, pw) == true){
+         if(NhanVienService.Login(id, pw) == 1){
              UserSession.getInstace(id);
              App.setRoot("index");
          }
+         else if(NhanVienService.Login(id, pw) == 0){
+             erro.setText("Nhân viên không thuộc chi nhánh nào");
+         }
          else
-             erro.setText("Sai tên đăng nhập hoặc mật khẩu");
+              erro.setText("Tên đăng nhập hoặc mật khẩu sai");
         
     }
 }

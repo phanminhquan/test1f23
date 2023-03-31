@@ -35,5 +35,11 @@ public class LoaiSanPham {
     public LoaiSanPham(String MaLoaiSanPham, String TenLoaiSanPham) {
         this.MaLoaiSanPham = MaLoaiSanPham;
         this.TenLoaiSanPham = TenLoaiSanPham;
-    }     
+    }    
+
+    @Override
+    public String toString() {
+        return this.TenLoaiSanPham;
+    }
+    
 }

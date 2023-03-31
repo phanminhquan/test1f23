@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonType?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.DialogPane?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -11,7 +12,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-
 
 <DialogPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.appbh.KhachHangController">
    <content>
@@ -57,7 +57,7 @@
                            </font>
                         </Label>
                         <TextField fx:id="DiaChiText" layoutX="517.0" layoutY="2.0" prefHeight="25.0" prefWidth="318.0" />
-                        <TextField fx:id="DienThoaiText" layoutX="517.0" layoutY="44.0" prefHeight="25.0" prefWidth="216.0" />
+                        <TextField fx:id="DienThoaiText" layoutX="517.0" layoutY="44.0" prefHeight="25.0" prefWidth="137.0" />
                         <Button layoutX="375.0" layoutY="43.0" mnemonicParsing="false" onAction="#SeacrhCustomerByName" prefHeight="25.0" prefWidth="39.0" text="Tìm">
                            <font>
                               <Font name="Arial Bold" size="10.0" />
@@ -68,6 +68,12 @@
                               <Font name="Arial Bold" size="10.0" />
                            </font>
                         </Button>
+                        <DatePicker fx:id="NgaySinhKH" layoutX="657.0" layoutY="44.0" />
+                        <Label layoutX="684.0" layoutY="74.0" text="Ngày sinh">
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font>
+                        </Label>
                      </children>
                   </Pane>
                </children>
@@ -87,7 +93,14 @@
             </HBox>
             <HBox prefHeight="63.0" prefWidth="857.0">
                <children>
-                  <Pane prefHeight="63.0" prefWidth="858.0" />
+                  <Pane prefHeight="63.0" prefWidth="858.0">
+                     <children>
+                        <Button layoutX="13.0" layoutY="15.0" mnemonicParsing="false" onAction="#addKhachHang" prefHeight="25.0" prefWidth="102.0" text="Thêm">
+                           <font>
+                              <Font name="Arial Bold" size="10.0" />
+                           </font>
+                        </Button>
+                     </children></Pane>
                </children>
             </HBox>
          </children>

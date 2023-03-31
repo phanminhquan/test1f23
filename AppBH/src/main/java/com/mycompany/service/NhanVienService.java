@@ -24,16 +24,20 @@ import static javafx.css.SizeUnits.S;
  * @author DELL
  */
 public class NhanVienService {
-    public static boolean Login(String IDNV, String pw) throws SQLException{
+    public static int Login(String IDNV, String pw) throws SQLException{
         try ( Connection conn = JdbcUtils.getConn()) {
            
             PreparedStatement stm = conn.prepareCall("Select * from tblnhanvien where MaNhanVien = ? and Password = ?");            
             stm.setString(1, IDNV);
             stm.setString(2, pw);
-            ResultSet r = stm.executeQuery();
-            if(r.next())
-                return true;
-            else return false;
+            ResultSet rs = stm.executeQuery();
+            if(rs.next()){
+                NhanVien n = new NhanVien(rs.getString("MaNhanVien"), rs.getString("TenNhanVien"),rs.getString("GioiTinh"),rs.getString("DiaChi"),rs.getString("DienThoai"),rs.getDate("NgaySinh"),rs.getInt("idChiNhanh"),rs.getString("Password"));
+                if(n.getIDChiNhanh() != 0)
+                    return 1;
+                return 0;
+            }
+            else return -1;
         }
     }
     

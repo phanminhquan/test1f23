@@ -22,6 +22,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 /**
  *
@@ -105,4 +106,54 @@ public class LoaiSanPhamController implements Initializable{
         }
         App.setRoot("LoaiSanPham");
     }
+    
+    String IDTextBox = null;
+
+    @FXML
+    public void g(MouseEvent event) throws SQLException {
+        LoaiSanPham a = this.listLoaiSanPham.getSelectionModel().getSelectedItem();
+        this.idLoaiSPText.setText(a.getMaLoaiSanPham());
+        this.TenLoaiSPText.setText(a.getTenLoaiSanPham());
+        IDTextBox = a.getMaLoaiSanPham();
+    }
+    public void deleteLoaiSanPham() throws IOException {
+        
+            try {
+                LoaiSanPhamService.deleteLoaiSanPham(this.idLoaiSPText.getText());
+                MessageBox.getBox("Loại sản phẩm", "Xóa loại sản phẩm thành công!!!",
+                        Alert.AlertType.INFORMATION).show();
+            } catch (SQLException ex) {
+                Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
+                MessageBox.getBox("Loại sản phẩm", "Xóa loại sản phẩm thất bại!!!",
+                        Alert.AlertType.ERROR).show();  
+            }
+            App.setRoot("LoaiSanPham");
+
+    }
+    
+    public void UpdateLoaiSanPham() throws IOException {
+        try {
+            
+            String id = this.idLoaiSPText.getText();
+
+            if (id.equals(IDTextBox)) {
+                String name = this.TenLoaiSPText.getText();
+                LoaiSanPhamService.updateLoaiSanPham(id, name);
+                MessageBox.getBox("Loại sản phẩm", "Sửa loại sản phẩm thành công!!!",
+                        Alert.AlertType.INFORMATION).show();
+            } else {
+                MessageBox.getBox("Loại sản phẩm", " Không được sửa mã loại sản phẩm!!!",
+                        Alert.AlertType.ERROR).show();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
+            MessageBox.getBox("Loại sản phẩm", "Sửa loại sản phẩm thất bại!!!",
+                    Alert.AlertType.ERROR).show();
+
+        }
+        App.setRoot("LoaiSanPham");
+
+    }
+
+
 }

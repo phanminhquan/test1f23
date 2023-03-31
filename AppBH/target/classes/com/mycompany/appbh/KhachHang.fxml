@@ -148,11 +148,6 @@
                         <Font name="Arial Bold" size="15.0" />
                      </font>
                   </Button>
-                  <Button layoutX="408.0" layoutY="18.0" mnemonicParsing="false" onAction="#addKhachHang" prefHeight="27.0" prefWidth="67.0" text="Thêm">
-                     <font>
-                        <Font name="Arial Bold" size="15.0" />
-                     </font>
-                  </Button>
                </children>
             </Pane>
          </children>

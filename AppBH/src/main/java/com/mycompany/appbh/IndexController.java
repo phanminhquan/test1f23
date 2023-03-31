@@ -21,6 +21,14 @@ import com.mycompany.service.HoaDonService;
 import com.mycompany.utils.MessageBox;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardWatchEventKinds;
+import java.nio.file.WatchEvent;
+import java.nio.file.WatchKey;
+import java.nio.file.WatchService;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -182,6 +190,7 @@ public class IndexController implements Initializable {
     KhachHang select;
     NhanVien a;
     List<Hang> items;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Date date = new Date();
@@ -200,14 +209,16 @@ public class IndexController implements Initializable {
                 maHoaDon = Integer.parseInt(rs.getString("MaHDBan"));
             }
 
-            this.MaHoaDon.setText(Integer.toString(maHoaDon)+1);
+            this.MaHoaDon.setText(Integer.toString(maHoaDon) + 1);
 
             a = NhanVienService.GetNhanVienByID(UserSession.getUserID().toString()).get(0);
             this.TenNV.setText(a.getTenNV());
+
             ChiNhanh b = ChiNhanhService.GetChiNhanhByID(Integer.toString(a.getIDChiNhanh()));
+
             this.ChiNhanh.setText(b.getDiaChi());
             items = SanPhamService.GetSanPham();
-            
+
             this.l.setItems(FXCollections.observableArrayList(items));
             this.content.setEditable(true);
 
@@ -271,7 +282,7 @@ public class IndexController implements Initializable {
         if (btn.get() == ButtonType.APPLY) {
             if (c.listSanPham.getSelectionModel().getSelectedItem() != null) {
                 for (Hang i : items) {
-                    if (i.getMaHang().equals(c.listSanPham.getSelectionModel().getSelectedItem().getMaHang())){
+                    if (i.getMaHang().equals(c.listSanPham.getSelectionModel().getSelectedItem().getMaHang())) {
                         l.setValue(i);
                         break;
                     }
@@ -302,20 +313,28 @@ public class IndexController implements Initializable {
     public void AddITem() throws SQLException {
 
         Hang a = this.l.getValue();
-        if (DonViTinhService.getDonVITinhByID(Integer.toString(a.getDonViTinh())).getValue().equals("Kg")) {
-            a.setSoLuongBan(0);
-        } else {
-            a.setSoLuongBan(1);
+        boolean isFound = false;
+        for (Hang i : itemInContent) {
+            if (i.getMaHang().equals(a.getMaHang())) {
+                isFound = true;
+                break;
+            }
         }
+
         try {
 
-            if (!itemInContent.contains(a)) {
+            if (!isFound) {
+                if (DonViTinhService.getDonVITinhByID(Integer.toString(a.getDonViTinh())).getValue().equals("Kg")) {
+                    a.setSoLuongBan(0);
+                } else {
+                    a.setSoLuongBan(1);
+                }
                 itemInContent.add(a);
                 this.addListToTableView();
 
             } else {
                 for (Hang i : itemInContent) {
-                    if (i.equals(a)) {
+                    if (i.getMaHang().equals(a.getMaHang())) {
                         if (!DonViTinhService.getDonVITinhByID(Integer.toString(a.getDonViTinh())).getValue().equals("Kg")) {
                             i.setSoLuongBan(i.getSoLuongBan() + 1);
                         }
@@ -376,12 +395,17 @@ public class IndexController implements Initializable {
     }
 
     @FXML
-    public void updateSoLuong() throws SQLException {
+    public void updateSoLuong() throws SQLException, Exception {
         try {
             int SoLuong = Integer.parseInt(this.InfoSoLuong.getText());
             for (Hang i : itemInContent) {
                 if (i.equals(selectHang)) {
-                    i.setSoLuongBan(SoLuong);
+                    Hang checkSL = SanPhamService.GetSanPhamByID(i.getMaHang()).get(0);
+                    if (checkSL.getSoLuong() >= SoLuong) {
+                        i.setSoLuongBan(SoLuong);
+                    } else {
+                        throw new Exception("Hàng còn lại trong kho không đủ. Còn lại: " + checkSL.getSoLuong());
+                    }
                     break;
                 }
             }
@@ -391,7 +415,10 @@ public class IndexController implements Initializable {
             Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
             MessageBox.getBox("Sai định dạng", "Số lượng bãn nhập không đúng định dạng!!",
                     Alert.AlertType.ERROR).show();
-
+        } catch (Exception ex) {
+            Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
+            MessageBox.getBox("Cảnh báo", ex.getMessage(),
+                    Alert.AlertType.ERROR).show();
         }
     }
 
@@ -419,10 +446,13 @@ public class IndexController implements Initializable {
         Date NgayBanDate = Date.from(instant);
 
         try {
-            if(itemInContent.size() == 0) throw new Exception("Chưa có mặc hàng nào để thanh toán");
+            if (itemInContent.size() == 0) {
+                throw new Exception("Chưa có mặc hàng nào để thanh toán");
+            }
             HoaDonBan currentHD = HoaDonService.addHoaDon(a.getMaNV(), NgayBanDate, select.getMaKhach(), Double.parseDouble(ThanhToan.getText()), a.getIDChiNhanh());
-            for(Hang i: itemInContent){
+            for (Hang i : itemInContent) {
                 HoaDonService.addHoaDonBan(currentHD, i.getMaHang(), i.getSoLuongBan(), i.getDonGiaBan(), Double.parseDouble(Integer.toString(i.getGiaGiam())), i.getTongGiaTien());
+                SanPhamService.updateSLHang(i.getMaHang(), i.getSoLuongBan());
             }
             MessageBox.getBox("Thanh toán", "Thanh toán thành công!!!",
                     Alert.AlertType.INFORMATION).show();
@@ -431,20 +461,36 @@ public class IndexController implements Initializable {
             Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
             MessageBox.getBox("Thanh toán", "Thanh toán thất bại!!!",
                     Alert.AlertType.ERROR).show();
-        }
-         catch (NullPointerException ex) {
+        } catch (NullPointerException ex) {
             Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
             MessageBox.getBox("Thanh toán", "Chưa nhập khách hàng???!!!",
                     Alert.AlertType.ERROR).show();
-        
+
         } catch (Exception ex) {
             Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
             MessageBox.getBox("Thanh toán", ex.getMessage(),
                     Alert.AlertType.ERROR).show();
         }
-        
 
-        
+    }
+
+    @FXML
+    public void ScanProduct() throws IOException, InterruptedException {
+        try ( WatchService w = FileSystems.getDefault().newWatchService()) {
+            Path path = Paths.get("E:\\barcodeBanHang");
+            WatchKey wk;
+            boolean start = true;
+            do {
+                wk = w.take();
+                for (WatchEvent<?> event : wk.pollEvents()) {
+                    WatchEvent.Kind<?> kind = event.kind();
+                    System.out.print(kind);
+                    if (kind.equals(StandardWatchEventKinds.ENTRY_MODIFY)) {
+//                        Hang a = SanPhamService.GetSanPhamByID(ID);
+                        start = false;
+                    }
+                }
+            } while (start);
+        }
     }
 }
-

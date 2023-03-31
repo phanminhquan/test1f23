@@ -75,4 +75,28 @@ public class ChiNhanhService {
             return r >0;           
         }
     }
+    
+    public static boolean deleteChiNhanh(String ID) throws SQLException {
+        try (Connection conn = JdbcUtils.getConn()) {
+            String sql = "DELETE FROM tblchinhanh WHERE id =?";
+            PreparedStatement stm = conn.prepareCall(sql);
+            stm.setString(1, ID);
+            
+            int t = stm.executeUpdate();
+            
+            return t > 0;
+        }
+    }
+    
+    public static boolean updateChiNhanh(int id, String DiaChi ) throws SQLException{
+        
+        try(Connection conn = JdbcUtils.getConn()){
+            String sql = "update tblchinhanh set DiaCHi = ? where id = ?";
+            PreparedStatement stm = conn.prepareCall(sql);        
+            stm.setString(1,DiaChi);
+            stm.setInt(2,id);
+            int r  = stm.executeUpdate();
+            return r >0;           
+        }
+    }
 }

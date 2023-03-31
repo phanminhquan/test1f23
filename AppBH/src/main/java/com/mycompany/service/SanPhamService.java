@@ -110,4 +110,49 @@ public class SanPhamService {
         }
     }
     
+    public static boolean updateSanPham(String MaHang, String TenHang,String MaLoaiSanPham,double SoLuong,double DonGiaNhap,double DonGiaBan,String Anh, String GhiChu, int IdKhuyenMai, int DonViTinh ) throws SQLException{
+        
+        try(Connection conn = JdbcUtils.getConn()){
+            String sql = "update tblhang set TenHang = ? , MaLoaiSanPham = ?, SoLuong = ?, DonGiaNhap = ?,DonGiaBan = ? , Anh = ?,GhiChu = ?, IdKhuyenMai=?, DonViTinh = ? where  MaHang = ?";
+            PreparedStatement stm = conn.prepareCall(sql);        
+            stm.setString(1,TenHang);
+            stm.setString(2,MaLoaiSanPham);
+            stm.setDouble(3,SoLuong);
+            stm.setDouble(4,DonGiaNhap);
+            stm.setDouble(5,DonGiaBan);
+            stm.setString(6,Anh);
+            stm.setString(7,GhiChu);
+            stm.setInt(8,IdKhuyenMai);
+            stm.setInt(9,DonViTinh);
+            stm.setString(10,MaHang);
+            int r  = stm.executeUpdate();
+            return r >0;           
+        }
+    }
+    public static boolean deleteSanPham(String ID) throws SQLException {
+        try (Connection conn = JdbcUtils.getConn()) {
+            String sql = "DELETE FROM tblhang WHERE MaHang=?";
+            PreparedStatement stm = conn.prepareCall(sql);
+            stm.setString(1, ID);
+            
+            int t = stm.executeUpdate();
+            
+            return t > 0;
+        }
+    }
+    
+    public static boolean updateSLHang(String id, double SLUpdate) throws SQLException{
+         try (Connection conn = JdbcUtils.getConn()) {
+             String sql = "update tblhang set  SoLuong = SoLuong - ? where  MaHang = ?";
+              PreparedStatement stm = conn.prepareCall(sql);
+             stm.setString(1, Double.toString(SLUpdate));
+              stm.setString(2,id );
+            
+            int t = stm.executeUpdate();
+            
+            return t > 0;
+         }
+    }
+
+    
 }

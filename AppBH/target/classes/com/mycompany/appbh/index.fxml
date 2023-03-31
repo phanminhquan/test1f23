@@ -52,6 +52,7 @@
             <Button layoutX="411.0" layoutY="9.0" mnemonicParsing="false" onAction="#DeleteItem" prefHeight="25.0" prefWidth="49.0" text="Xóa" />
             <Button layoutX="482.0" layoutY="9.0" mnemonicParsing="false" onMouseClicked="#PanelSanPham" prefHeight="25.0" prefWidth="49.0" text="Tìm" />
             <ComboBox fx:id="l" layoutX="21.0" layoutY="9.0" prefHeight="25.0" prefWidth="294.0" />
+            <Button layoutX="548.0" layoutY="9.0" mnemonicParsing="false" onAction="#ScanProduct" prefHeight="25.0" prefWidth="49.0" text="quét" />
          </children>
       </Pane>
       <TableView fx:id="content" onMouseClicked="#g" prefHeight="701.0" prefWidth="512.0">

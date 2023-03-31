@@ -87,7 +87,7 @@
             </Pane>
          </children>
       </HBox>
-      <TableView fx:id="listLoaiSanPham" prefHeight="335.0" prefWidth="857.0">
+      <TableView fx:id="listLoaiSanPham" onMouseClicked="#g" prefHeight="335.0" prefWidth="857.0">
          <columns>
             <TableColumn fx:id="MaLoaiSanPham" prefWidth="127.0" text="Mã loại sản phẩm" />
             <TableColumn fx:id="TenLoaiSanPham" prefWidth="729.0" text="Tên loại sản phẩm" />
@@ -112,12 +112,12 @@
                         <Font name="Arial Bold" size="15.0" />
                      </font>
                   </Button>
-                  <Button layoutX="605.0" layoutY="28.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="60.0" text="Sửa">
+                  <Button layoutX="605.0" layoutY="28.0" mnemonicParsing="false" onAction="#UpdateLoaiSanPham" prefHeight="27.0" prefWidth="60.0" text="Sửa">
                      <font>
                         <Font name="Arial Bold" size="15.0" />
                      </font>
                   </Button>
-                  <Button layoutX="522.0" layoutY="28.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="60.0" text="Xóa">
+                  <Button layoutX="522.0" layoutY="28.0" mnemonicParsing="false" onAction="#deleteLoaiSanPham" prefHeight="27.0" prefWidth="60.0" text="Xóa">
                      <font>
                         <Font name="Arial Bold" size="15.0" />
                      </font>
