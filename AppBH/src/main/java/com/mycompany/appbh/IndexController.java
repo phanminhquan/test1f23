@@ -310,7 +310,7 @@ public class IndexController implements Initializable {
     }
 
     @FXML
-    public void AddITem() throws SQLException {
+    public void AddITem() throws SQLException, Exception {
 
         Hang a = this.l.getValue();
         boolean isFound = false;
@@ -329,6 +329,8 @@ public class IndexController implements Initializable {
                 } else {
                     a.setSoLuongBan(1);
                 }
+                if(SanPhamService.GetSanPhamByID(Integer.toString(a.getDonViTinh())).get(0).getSoLuong() ==0)
+                    throw new Exception("Hết hàng");
                 itemInContent.add(a);
                 this.addListToTableView();
 
@@ -336,8 +338,12 @@ public class IndexController implements Initializable {
                 for (Hang i : itemInContent) {
                     if (i.getMaHang().equals(a.getMaHang())) {
                         if (!DonViTinhService.getDonVITinhByID(Integer.toString(a.getDonViTinh())).getValue().equals("Kg")) {
+                            Hang checkSL = SanPhamService.GetSanPhamByID(i.getMaHang()).get(0);
+                            if(checkSL.getSoLuong() <= i.getSoLuongBan())
+                                throw new Exception("Hàng trong kho không đủ");
                             i.setSoLuongBan(i.getSoLuongBan() + 1);
                         }
+                        else throw new Exception("Hàng đã có, vui lòng nhập số KG");
                         break;
                     }
                 }
@@ -346,6 +352,12 @@ public class IndexController implements Initializable {
         } catch (NullPointerException ex) {
             Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
             MessageBox.getBox("Cảnh báo", "bạn chưa chọn sản phẩm thêm vào",
+                    Alert.AlertType.ERROR).show();
+
+        }
+        catch (Exception ex) {
+            Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
+            MessageBox.getBox("Cảnh báo", ex.getMessage(),
                     Alert.AlertType.ERROR).show();
 
         }
