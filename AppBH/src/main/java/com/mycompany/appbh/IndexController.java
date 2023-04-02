@@ -177,6 +177,10 @@ public class IndexController implements Initializable {
     private void switchToSanPham() throws IOException, SQLException {
         App.setRoot("SanPham");
     }
+    @FXML
+    private void switchToSearchHoaDon() throws IOException, SQLException {
+        App.setRoot("HoaDon");
+    }
 
     public Date removeTime(Date date) {
         Calendar cal = Calendar.getInstance();

@@ -16,7 +16,10 @@ public class DonViTinh {
     public void setId(int Id) {
         this.Id = Id;
     }
-
+    public int getID ()
+    {
+        return Id;
+    }
     /**
      * @return the Value
      */
@@ -40,6 +43,11 @@ public class DonViTinh {
         this.Id = Id;
         this.Value = Value;
     }
-    
+
+    @Override
+    public String toString()
+    {
+        return this.Value;
+    }
     
 }

@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,18 @@ import java.util.List;
  * @author DELL
  */
 public class KhuyenMaiService {
+    public static List<KhuyenMai> GetKhuyenMai() throws SQLException{
+        List<KhuyenMai> listkhuyenmai = new ArrayList<>();
+         try ( Connection conn = JdbcUtils.getConn()) {           
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT * FROM tblkhuyenmai");
+            while (rs.next()) {
+                KhuyenMai c = new KhuyenMai(rs.getInt("id"),rs.getDate("NgayBatDau"),rs.getDate("NgayKetThuc"), rs.getInt("GiaTri"));
+                listkhuyenmai.add(c);
+            }
+        }
+        return listkhuyenmai;
+    }
     public static KhuyenMai KhuyenMaiByID(String ID) throws SQLException{
         List<KhuyenMai> list = new ArrayList<>();
         try (Connection conn = JdbcUtils.getConn()) {

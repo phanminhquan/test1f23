@@ -13,7 +13,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -61,5 +63,57 @@ public class HoaDonService {
             int r = stm.executeUpdate();
             return r > 0;
         }
+    }
+    
+    public static List<HoaDonBan> Gethoadon() throws SQLException{
+        List<HoaDonBan> listhd = new ArrayList<>();
+         try ( Connection conn = JdbcUtils.getConn()) {           
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT * FROM tblhdban");
+            while (rs.next()) {
+                HoaDonBan c = new HoaDonBan(rs.getString("MaHDBan"), rs.getString("MaNhanVien"),rs.getDate("NgayBan"),rs.getString("MaKhach"),rs.getDouble("TongTien"),rs.getInt("IdChiNhanh"));
+                listhd.add(c);
+            }
+        }
+        return listhd;
+    }
+//    public static List<Hang> GetSanPhamByID(String ID) throws SQLException{
+//        List<Hang> listSanPham = new ArrayList<>();
+//        try (Connection conn = JdbcUtils.getConn()) {
+//            String sql = "SELECT * FROM tblhang";
+//            if (ID != null && !ID.isEmpty())
+//                sql += " WHERE MaHang = ?";
+//            
+//            PreparedStatement stm = conn.prepareCall(sql);
+//            if (ID != null && !ID.isEmpty())
+//                stm.setString(1, ID);
+//            
+//            ResultSet rs = stm.executeQuery();
+//            while (rs.next()) {
+//               Hang n = new Hang(rs.getString("MaHang"), rs.getString("TenHang"),rs.getString("MaLoaiSanPham"),rs.getDouble("SoLuong"),rs.getDouble("DonGiaNhap"),rs.getDouble("DonGiaBan"),rs.getString("Anh"),rs.getString("GhiChu"),rs.getInt("IdKhuyenMai"),rs.getInt("DonViTinh"));
+//               listSanPham.add(n);
+//            }
+//            return listSanPham;
+//    }
+//    }
+    public static List<HoaDonBan> GetHoaDonByName(String Name) throws SQLException{
+        
+        List<HoaDonBan> listhoadon = new ArrayList<>();
+        try (Connection conn = JdbcUtils.getConn()) {
+            String sql = "SELECT * FROM tblhdban a join tblkhach b on a.MaKhach = b.MaKhach";
+            if (Name != null && !Name.isEmpty())
+                sql += " WHERE b.TenKhach like concat('%', ?, '%')";
+            
+            PreparedStatement stm = conn.prepareCall(sql);
+            if (Name != null && !Name.isEmpty())
+                stm.setString(1, Name);
+            
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+               HoaDonBan n = new HoaDonBan(rs.getString("MaHDBan"), rs.getString("MaNhanVien"),rs.getDate("NgayBan"),rs.getString("MaKhach"),rs.getDouble("TongTien"),rs.getInt("IdChiNhanh"));
+               listhoadon.add(n);
+            }
+            return listhoadon;
+    }
     }
 }

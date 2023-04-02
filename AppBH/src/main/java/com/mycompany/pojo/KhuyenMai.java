@@ -74,5 +74,9 @@ public class KhuyenMai {
         this.NgayKetThuc = NgayKetThuc;
         this.GiaTri = GiaTri;
     }
-    
+    @Override
+    public String toString()
+    {
+        return Integer.toString(this.GiaTri);
+    }
 }

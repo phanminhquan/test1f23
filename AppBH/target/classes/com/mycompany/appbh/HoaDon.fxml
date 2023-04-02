@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="622.0" prefWidth="857.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="622.0" prefWidth="857.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.appbh.HoaDonController">
    <children>
       <MenuBar prefHeight="25.0" prefWidth="857.0" style="-fx-background-color: #00CCCC;">
          <menus>
@@ -114,10 +114,14 @@
       </HBox>
       <HBox prefHeight="328.0" prefWidth="859.0">
          <children>
-            <TableView prefHeight="300.0" prefWidth="858.0">
+            <TableView fx:id="listHoaDonBan" prefHeight="300.0" prefWidth="858.0">
                <columns>
-                  <TableColumn prefWidth="75.0" text="C1" />
-                  <TableColumn prefWidth="75.0" text="C2" />
+                  <TableColumn fx:id="MaHD" prefWidth="83.0" text="Mã hóa đơn" />
+                  <TableColumn fx:id="MaNV" prefWidth="178.0" text="Tên Nhân Viên" />
+                  <TableColumn fx:id="NgayBan" prefWidth="135.0" text="Ngày bán" />
+                  <TableColumn fx:id="MaKhach" prefWidth="203.0" text="Khách hàng" />
+                  <TableColumn fx:id="TongTien" prefWidth="113.0" text="Tổng tiền" />
+                  <TableColumn fx:id="IdChiNhanh" prefWidth="145.0" text="Chi nhánh" />
                </columns>
             </TableView>
          </children>
