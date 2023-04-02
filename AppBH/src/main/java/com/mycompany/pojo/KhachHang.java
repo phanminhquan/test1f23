@@ -95,5 +95,12 @@ public class KhachHang {
     public void setDienThoai(String DienThoai) {
         this.DienThoai = DienThoai;
     }
+
+    @Override
+    public String toString() {
+        return this.TenKhach;
+    }
+    
+    
    
 }

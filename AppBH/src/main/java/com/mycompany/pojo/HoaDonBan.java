@@ -4,6 +4,10 @@
  */
 package com.mycompany.pojo;
 
+import com.mycompany.service.ChiNhanhService;
+import com.mycompany.service.KhachHangService;
+import com.mycompany.service.NhanVienService;
+import java.sql.SQLException;
 import java.util.Date;
 
 /**
@@ -22,8 +26,11 @@ public class HoaDonBan {
     /**
      * @return the MaNV
      */
-    public String getMaNV() {
-        return MaNV;
+    public String getMaNV() throws SQLException {
+        if(MaNV == null)
+            return "";
+        else
+            return NhanVienService.GetNhanVienByID(MaNV).get(0).getTenNV() ;
     }
 
     /**
@@ -50,8 +57,10 @@ public class HoaDonBan {
     /**
      * @return the MaKH
      */
-    public String getMaKH() {
-        return MaKH;
+    public String getMaKH() throws SQLException {
+        
+        return KhachHangService.GetKhachHangByID(MaKH).get(0).getTenKhach(); 
+//        return MaKH;
     }
 
     /**
@@ -78,8 +87,10 @@ public class HoaDonBan {
     /**
      * @return the IDChiNhanh
      */
-    public int getIDChiNhanh() {
-        return IDChiNhanh;
+    public String getIDChiNhanh() throws SQLException {
+        if(IDChiNhanh == 0)
+            return "";
+        else return ChiNhanhService.GetChiNhanhByID(Integer.toString(IDChiNhanh)).getDiaChi();
     }
 
     /**

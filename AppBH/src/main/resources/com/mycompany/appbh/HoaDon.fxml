@@ -66,48 +66,32 @@
          <children>
             <Pane prefHeight="141.0" prefWidth="858.0">
                <children>
-                  <Label layoutX="14.0" layoutY="6.0" text="Mã hóa đơn">
+                  <Label layoutX="14.0" layoutY="7.0" text="Tên khách hàng">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="426.0" layoutY="7.0" text="Tên khách hàng">
+                  <Label layoutX="14.0" layoutY="86.0" text="Ngày">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="118.0" layoutY="2.0" prefHeight="25.0" prefWidth="126.0" />
-                  <TextField layoutX="118.0" layoutY="43.0" prefHeight="25.0" prefWidth="248.0" />
-                  <Label layoutX="14.0" layoutY="86.0" text="Tháng">
+                  <TextField fx:id="tenKH" layoutX="137.0" layoutY="2.0" prefHeight="25.0" prefWidth="216.0" />
+                  <Label layoutX="242.0" layoutY="86.0" text="Tháng">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="11.0" layoutY="47.0" text="Tên nhân viên">
+                  <TextField fx:id="Day" layoutX="118.0" layoutY="82.0" prefHeight="25.0" prefWidth="79.0" />
+                  <TextField fx:id="Month" layoutX="287.0" layoutY="82.0" prefHeight="25.0" prefWidth="79.0" />
+                  <Button layoutX="367.0" layoutY="2.0" mnemonicParsing="false" onAction="#TimTenKH" text="Tìm" />
+                  <Button layoutX="630.0" layoutY="82.0" mnemonicParsing="false" onAction="#SearchByTime" text="Tìm" />
+                  <Label layoutX="403.0" layoutY="86.0" text="Năm">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="424.0" layoutY="86.0" text="Chi nhánh">
-                     <font>
-                        <Font name="Arial Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="423.0" layoutY="48.0" text="Tổng tiền">
-                     <font>
-                        <Font name="Arial Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <TextField layoutX="549.0" layoutY="2.0" prefHeight="25.0" prefWidth="301.0" />
-                  <TextField layoutX="549.0" layoutY="44.0" prefHeight="25.0" prefWidth="216.0" />
-                  <TextField layoutX="549.0" layoutY="82.0" prefHeight="25.0" prefWidth="301.0" />
-                  <Label layoutX="242.0" layoutY="86.0" text="Năm">
-                     <font>
-                        <Font name="Arial Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <TextField layoutX="118.0" layoutY="82.0" prefHeight="25.0" prefWidth="79.0" />
-                  <TextField layoutX="287.0" layoutY="82.0" prefHeight="25.0" prefWidth="79.0" />
+                  <TextField fx:id="Year" layoutX="507.0" layoutY="82.0" prefHeight="25.0" prefWidth="79.0" />
                </children>
             </Pane>
          </children>

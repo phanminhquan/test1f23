@@ -116,4 +116,67 @@ public class HoaDonService {
             return listhoadon;
     }
     }
+    
+    
+       public static List<HoaDonBan> GetHoaDonByTime(String Day,String Month,String Year) throws SQLException{
+        
+        List<HoaDonBan> listhoadon = new ArrayList<>();
+        try (Connection conn = JdbcUtils.getConn()) {
+            String sql = "SELECT * FROM tblhdban";
+            
+            if ((Day != null && !Day.isEmpty()) || Month != null && !Month.isEmpty() || Year != null && !Year.isEmpty())
+                sql += " Where ";
+            if (Day != null && !Day.isEmpty()){
+                sql += " Day(NgayBan) = ?";  
+                 
+            }
+            if (Month != null && !Month.isEmpty()){
+                if(Day == null || Day.isEmpty())
+                    sql += " Month(NgayBan) = ?";
+                else
+                    sql += " and Month(NgayBan) = ?"; 
+                
+            }
+            if (Year != null && !Year.isEmpty()){
+                if((Day == null || Day.isEmpty()) && (Month == null || Month.isEmpty()))
+                     sql += " Year(NgayBan) = ?";
+                else
+                    sql += " and Year(NgayBan) = ?"; 
+                
+            }
+            
+           
+            PreparedStatement stm = conn.prepareCall(sql);    
+            if (Day != null && !Day.isEmpty()){
+                
+                 stm.setString(1, Day);
+            }
+            if (Month != null && !Month.isEmpty()){
+                if(Day == null || Day.isEmpty())
+                    stm.setString(1, Month);
+                else
+                    stm.setString(2, Month);
+            }
+            if (Year != null && !Year.isEmpty()){
+                if((Day == null || Day.isEmpty()) && (Month != null && !Month.isEmpty()))
+                     stm.setString(2, Year);
+                else if(Month == null || Month.isEmpty()){
+                    if(!Day.isEmpty() || Day == null)
+                        stm.setString(2, Year);
+                    else
+                        stm.setString(1, Year);          
+                }
+                    
+                else
+                    stm.setString(3, Year);
+            }
+            
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+               HoaDonBan n = new HoaDonBan(rs.getString("MaHDBan"), rs.getString("MaNhanVien"),rs.getDate("NgayBan"),rs.getString("MaKhach"),rs.getDouble("TongTien"),rs.getInt("IdChiNhanh"));
+               listhoadon.add(n);
+            }
+            return listhoadon;
+    }
+    }
 }
