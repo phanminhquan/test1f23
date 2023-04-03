@@ -5,7 +5,9 @@
 package com.mycompany.appbh;
 
 import com.mycompany.pojo.KhachHang;
+import com.mycompany.service.ChiNhanhService;
 import com.mycompany.service.KhachHangService;
+import com.mycompany.service.NhanVienService;
 import com.mycompany.utils.MessageBox;
 import java.io.IOException;
 import java.net.URL;
@@ -27,6 +29,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 /**
  *
@@ -162,4 +165,61 @@ public class KhachHangController implements Initializable {
         this.listKhachHang.refresh();
 
     }
+    
+    String IDTextBox = null;
+
+    @FXML
+    public void g(MouseEvent event) throws SQLException {
+        KhachHang a = this.listKhachHang.getSelectionModel().getSelectedItem();
+        this.TenKhachHang.setText(a.getTenKhach());
+        this.MaKhachHang.setText(a.getMaKhach());
+        this.DiaChiText.setText(a.getDiaChi());
+        this.DienThoaiText.setText(a.getDienThoai());
+        this.NgaySinhKH.setValue(LocalDate.parse(a.getNgaySinh().toString()));
+        IDTextBox = a.getMaKhach();
+    }
+
+    public void UpdateKhachHang() throws IOException {
+        try {
+
+            String id = this.MaKhachHang.getText();
+
+            if (id.equals(IDTextBox)) {
+                String tenKhach = this.TenKhachHang.getText();
+                String diachi = this.DiaChiText.getText();
+                String dienthoai = this.DienThoaiText.getText();                
+                LocalDate dateIns = this.NgaySinhKH.getValue();
+                Instant instant = Instant.from(dateIns.atStartOfDay(ZoneId.systemDefault()));
+                Date NgaySinh = Date.from(instant);
+                KhachHangService.updateKhachHang(id, tenKhach, diachi, dienthoai, NgaySinh);
+                MessageBox.getBox("Khách Hàng", "Sửa khách hàng thành công!!!",
+                        Alert.AlertType.INFORMATION).show();
+            } else {
+                MessageBox.getBox("Khách Hàng", " Không được sửa mã khách hàng!!!",
+                        Alert.AlertType.ERROR).show();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
+            MessageBox.getBox("Khách Hàng", "Sửa khách hàng thất bại!!!",
+                    Alert.AlertType.ERROR).show();
+
+        }
+        App.setRoot("KhachHang");
+
+    }
+
+    public void deleteKhachHang() throws IOException {
+            try {
+                KhachHangService.deleteKhachHang(this.MaKhachHang.getText());
+                MessageBox.getBox("Khách Hàng", "Xóa khách hàng thành công!!!",
+                        Alert.AlertType.INFORMATION).show();
+            } catch (SQLException ex) {
+                Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
+                MessageBox.getBox("Khách Hàng", "Xóa khách hàng thất bại!!!",
+                        Alert.AlertType.ERROR).show();
+                ;
+            }
+            App.setRoot("KhachHang");
+
+        } 
 }

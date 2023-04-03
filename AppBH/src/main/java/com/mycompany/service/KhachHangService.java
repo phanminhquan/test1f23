@@ -95,4 +95,32 @@ public class KhachHangService {
             return r >0;           
         }
     }
+    
+    public static boolean updateKhachHang(String makhach, String name,String Sdt,String DiaChi,Date NgaySinh) throws SQLException{
+        
+        try(Connection conn = JdbcUtils.getConn()){
+            String sql = "update tblkhach set TenKhach = ? , DiaChi = ?, DienThoai = ?,NgaySinh = ? where  MaKhach = ?";
+            PreparedStatement stm = conn.prepareCall(sql);        
+             stm.setString(1,name);
+            stm.setString(2,Sdt);
+            stm.setString(3,DiaChi);
+            Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String s = formatter.format(NgaySinh);
+            stm.setString(4,s);
+            stm.setString(5,makhach);
+            int r  = stm.executeUpdate();
+            return r >0;           
+        }
+    }
+    public static boolean deleteKhachHang(String ID) throws SQLException {
+        try (Connection conn = JdbcUtils.getConn()) {
+            String sql = "DELETE FROM tblkhach WHERE MaKhach=?";
+            PreparedStatement stm = conn.prepareCall(sql);
+            stm.setString(1, ID);
+            
+            int t = stm.executeUpdate();
+            
+            return t > 0;
+        }
+    }
 }

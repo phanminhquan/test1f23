@@ -113,7 +113,7 @@
       </HBox>
       <HBox prefHeight="348.0" prefWidth="859.0">
          <children>
-            <TableView fx:id="listKhachHang" prefHeight="300.0" prefWidth="858.0">
+            <TableView fx:id="listKhachHang" onMouseClicked="#g" prefHeight="300.0" prefWidth="858.0">
                <columns>
                   <TableColumn fx:id="MaKhach" prefWidth="95.0" text="Mã khách hàng" />
                   <TableColumn fx:id="TenKhach" prefWidth="331.0" text="Tên khách hàng" />
@@ -138,12 +138,12 @@
                         <Font name="Arial Bold" size="15.0" />
                      </font>
                   </Button>
-                  <Button layoutX="500.0" layoutY="18.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="67.0" text="Xóa">
+                  <Button layoutX="500.0" layoutY="18.0" mnemonicParsing="false" onAction="#deleteKhachHang" prefHeight="27.0" prefWidth="67.0" text="Xóa">
                      <font>
                         <Font name="Arial Bold" size="15.0" />
                      </font>
                   </Button>
-                  <Button layoutX="589.0" layoutY="18.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="67.0" text="Sửa">
+                  <Button layoutX="589.0" layoutY="18.0" mnemonicParsing="false" onAction="#UpdateKhachHang" prefHeight="27.0" prefWidth="67.0" text="Sửa">
                      <font>
                         <Font name="Arial Bold" size="15.0" />
                      </font>
