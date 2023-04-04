@@ -8,6 +8,7 @@ import com.mycompany.pojo.DonViTinh;
 import com.mycompany.pojo.Hang;
 import com.mycompany.pojo.KhuyenMai;
 import com.mycompany.pojo.LoaiSanPham;
+import com.mycompany.pojo.UserSession;
 import com.mycompany.service.DonViTinhService;
 import com.mycompany.service.KhuyenMaiService;
 import com.mycompany.service.LoaiSanPhamService;
@@ -114,6 +115,17 @@ public class SanPhamController implements Initializable{
     @FXML
     private TextField DonViTinhText;
 
+     @FXML
+     private void switchToTrangChu() throws IOException 
+    {
+        App.setRoot("Index");
+    }
+     
+      @FXML
+    private void LogOut() throws IOException, SQLException {
+        UserSession.cleanUserSession();
+        App.setRoot("primary");
+    }
     @FXML
     private void switchToChiNhanh() throws IOException, SQLException {
         App.setRoot("ChiNhanh");

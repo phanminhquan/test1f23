@@ -5,6 +5,7 @@
 package com.mycompany.appbh;
 
 import com.mycompany.pojo.KhachHang;
+import com.mycompany.pojo.UserSession;
 import com.mycompany.service.ChiNhanhService;
 import com.mycompany.service.KhachHangService;
 import com.mycompany.service.NhanVienService;
@@ -100,7 +101,16 @@ public class KhachHangController implements Initializable {
     private void switchToSanPham() throws IOException, SQLException {
         App.setRoot("SanPham");
     }
-
+     @FXML
+     private void switchToTrangChu() throws IOException 
+    {
+        App.setRoot("Index");
+    }
+      @FXML
+    private void LogOut() throws IOException, SQLException {
+        UserSession.cleanUserSession();
+        App.setRoot("primary");
+    }
     private void addToTableList() throws SQLException {
         List<KhachHang> khachhang = KhachHangService.GetKhachHang();
         this.MaKhach.setCellValueFactory(new PropertyValueFactory<KhachHang, String>("MaKhach"));

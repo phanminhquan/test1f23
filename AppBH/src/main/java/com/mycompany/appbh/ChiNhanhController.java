@@ -5,6 +5,7 @@
 package com.mycompany.appbh;
 
 import com.mycompany.pojo.ChiNhanh;
+import com.mycompany.pojo.UserSession;
 import com.mycompany.service.ChiNhanhService;
 import com.mycompany.utils.MessageBox;
 import java.io.IOException;
@@ -77,7 +78,18 @@ public class ChiNhanhController implements Initializable{
     private void switchToSanPham() throws IOException, SQLException {
         App.setRoot("SanPham");
     }
-   
+    
+    @FXML
+     private void switchToTrangChu() throws IOException 
+    {
+        App.setRoot("Index");
+    }
+    @FXML
+    private void LogOut() throws IOException, SQLException {
+        UserSession.cleanUserSession();
+        App.setRoot("primary");
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {

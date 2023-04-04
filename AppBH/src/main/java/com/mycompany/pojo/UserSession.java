@@ -32,7 +32,7 @@ public final class UserSession {
 
 
 
-    public void cleanUserSession() {
+    public static void cleanUserSession() {
         userID = "";
     }
     

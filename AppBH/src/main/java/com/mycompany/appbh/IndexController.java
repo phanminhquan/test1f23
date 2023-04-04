@@ -181,6 +181,17 @@ public class IndexController implements Initializable {
     private void switchToSearchHoaDon() throws IOException, SQLException {
         App.setRoot("HoaDon");
     }
+    
+    @FXML
+    private void switchToThongKe() throws IOException, SQLException {
+        App.setRoot("ThongKe");
+    }
+    
+    @FXML
+    private void LogOut() throws IOException, SQLException {
+        UserSession.cleanUserSession();
+        App.setRoot("primary");
+    }
 
     public Date removeTime(Date date) {
         Calendar cal = Calendar.getInstance();
@@ -464,7 +475,9 @@ public class IndexController implements Initializable {
         try {
             if (itemInContent.size() == 0) {
                 throw new Exception("Chưa có mặc hàng nào để thanh toán");
-            }
+            }           
+            if(Double.parseDouble(this.TienMat.getText()) == 0 || Double.parseDouble(this.thoi.getText()) == 0)
+                throw new Exception("Chưa thanh toán");
             HoaDonBan currentHD = HoaDonService.addHoaDon(a.getMaNV(), NgayBanDate, select.getMaKhach(), Double.parseDouble(ThanhToan.getText()), a.getIDChiNhanh());
             for (Hang i : itemInContent) {
                 HoaDonService.addHoaDonBan(currentHD, i.getMaHang(), i.getSoLuongBan(), i.getDonGiaBan(), Double.parseDouble(Integer.toString(i.getGiaGiam())), i.getTongGiaTien());
@@ -502,7 +515,6 @@ public class IndexController implements Initializable {
                     WatchEvent.Kind<?> kind = event.kind();
                     System.out.print(kind);
                     if (kind.equals(StandardWatchEventKinds.ENTRY_MODIFY)) {
-//                        Hang a = SanPhamService.GetSanPhamByID(ID);
                         start = false;
                     }
                 }

@@ -25,6 +25,8 @@
                   <MenuItem mnemonicParsing="false" onAction="#switchToKhachHang" text="Khách Hàng" />
                   <MenuItem mnemonicParsing="false" onAction="#switchToSanPham" text="Sản phẩm" />
                   <MenuItem mnemonicParsing="false" onAction="#switchToChiNhanh" text="Chi nhánh" />
+                  <MenuItem mnemonicParsing="false" onAction="#switchToTrangChu" text="Trang chủ" />
+                  <MenuItem mnemonicParsing="false" onAction="#LogOut" text="Đăng xuất" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Hóa đơn">
@@ -34,18 +36,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Báo cáo">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Hàng tồn" />
                   <MenuItem mnemonicParsing="false" text="Doanh thu" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Trợ giúp">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Trợ giúp" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Đăng xuất">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="About" />
                </items>
             </Menu>
          </menus>

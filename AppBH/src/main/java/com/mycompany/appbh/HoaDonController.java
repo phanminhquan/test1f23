@@ -5,7 +5,9 @@
 package com.mycompany.appbh;
 
 import com.mycompany.pojo.HoaDonBan;
+import com.mycompany.pojo.UserSession;
 import com.mycompany.service.HoaDonService;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Date;
@@ -28,6 +30,41 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class HoaDonController implements Initializable {
 
+    @FXML
+    private void switchToChiNhanh() throws IOException, SQLException {
+        App.setRoot("ChiNhanh");
+    }
+
+    @FXML
+    private void switchToKhachHang() throws IOException, SQLException {
+        App.setRoot("KhachHang");
+    }
+
+    @FXML
+    private void switchToLoaiSanPham() throws IOException, SQLException {
+        App.setRoot("LoaiSanPham");
+    }
+
+    @FXML
+    private void switchToNhanVien() throws IOException, SQLException {
+        App.setRoot("NhanVien");
+    }
+
+    @FXML
+    private void switchToSanPham() throws IOException, SQLException {
+        App.setRoot("SanPham");
+    }
+     @FXML
+     private void switchToTrangChu() throws IOException 
+    {
+        App.setRoot("Index");
+    }
+    @FXML
+    private void LogOut() throws IOException, SQLException {
+        UserSession.cleanUserSession();
+        App.setRoot("primary");
+    }
+    
     @FXML
     private TableView<HoaDonBan> listHoaDonBan;
 

@@ -73,7 +73,6 @@
                         </Label>
                         <TextField fx:id="DongiaNhapText" layoutX="517.0" layoutY="2.0" prefHeight="25.0" prefWidth="216.0" />
                         <TextField fx:id="DonGiaBanText" layoutX="517.0" layoutY="36.0" prefHeight="25.0" prefWidth="216.0" />
-                        <TextField fx:id="IdKhuyenMaiText" layoutX="517.0" layoutY="102.0" prefHeight="25.0" prefWidth="216.0" />
                         <Label layoutX="14.0" layoutY="107.0" text="Số lượng">
                            <font>
                               <Font name="Arial Bold" size="14.0" />
@@ -92,7 +91,6 @@
                            </font>
                         </Label>
                         <TextField fx:id="GhiChuText" layoutX="517.0" layoutY="137.0" prefHeight="25.0" prefWidth="319.0" />
-                        <TextField fx:id="DonViTinhText" layoutX="517.0" layoutY="71.0" prefHeight="25.0" prefWidth="216.0" />
                         <Button layoutX="242.0" layoutY="2.0" mnemonicParsing="false" onAction="#SeacrhStaffByID" prefHeight="25.0" prefWidth="45.0" text="Tìm">
                            <font>
                               <Font name="Arial Bold" size="11.0" />
@@ -104,6 +102,8 @@
                            </font>
                         </Button>
                         <ComboBox fx:id="ListLoaiSanPham" layoutX="118.0" layoutY="71.0" prefHeight="25.0" prefWidth="290.0" />
+                        <ComboBox fx:id="ListDonViTinh" layoutX="516.0" layoutY="71.0" prefHeight="25.0" prefWidth="212.0" />
+                        <ComboBox fx:id="ListKhuyenMai" layoutX="517.0" layoutY="111.0" prefHeight="25.0" prefWidth="215.0" />
                      </children>
                   </Pane>
                </children>

@@ -4,6 +4,7 @@
  */
 package com.mycompany.appbh;
 import com.mycompany.pojo.LoaiSanPham;
+import com.mycompany.pojo.UserSession;
 import com.mycompany.service.LoaiSanPhamService;
 import com.mycompany.utils.MessageBox;
 import java.io.IOException;
@@ -64,10 +65,20 @@ public class LoaiSanPhamController implements Initializable{
     private void switchToNhanVien() throws IOException, SQLException {
         App.setRoot("NhanVien");
     }
-
+     @FXML
+     private void switchToTrangChu() throws IOException 
+    {
+        App.setRoot("Index");
+    }
+    
     @FXML
     private void switchToSanPham() throws IOException, SQLException {
         App.setRoot("SanPham");
+    }
+     @FXML
+    private void LogOut() throws IOException, SQLException {
+        UserSession.cleanUserSession();
+        App.setRoot("primary");
     }
 
     @Override

@@ -121,7 +121,17 @@ public class NhanVienController implements Initializable {
     private void switchToSanPham() throws IOException, SQLException {
         App.setRoot("SanPham");
     }
-
+     @FXML
+     private void switchToTrangChu() throws IOException 
+    {
+        App.setRoot("Index");
+    }
+     
+    @FXML
+    private void LogOut() throws IOException, SQLException {
+        UserSession.cleanUserSession();
+        App.setRoot("primary");
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -195,9 +205,10 @@ public class NhanVienController implements Initializable {
     }
     String IDTextBox = null;
 
+    
     @FXML
     public void g(MouseEvent event) throws SQLException {
-        NhanVien a = this.listNhanVien.getSelectionModel().getSelectedItem();
+            NhanVien a = this.listNhanVien.getSelectionModel().getSelectedItem();
         this.nameNhanVien.setText(a.getTenNV());
         this.idNhanVien.setText(a.getMaNV());
         this.GioiTinhText.setText(a.getGioiTinh());
