@@ -221,7 +221,7 @@ public class SanPhamController implements Initializable{
         String Anh = this.AnhText.getText();
         String GhiChu = this.GhiChuText.getText();
         int IdKhuyenMai = ListKhuyenMai.getSelectionModel().getSelectedItem().getID();
-        int DonViTinh = Integer.parseInt(this.DonViTinhText.getText());     
+        int DonViTinh = ListDonViTinh.getSelectionModel().getSelectedItem().getID();
         SanPhamService s = new SanPhamService();
         try {
             s.addSanPham(TenHang, MaLoaiSanPham, SoLuong, DonGiaNhap, DonGiaBan, Anh,GhiChu,IdKhuyenMai,DonViTinh);

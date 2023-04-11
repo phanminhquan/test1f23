@@ -15,9 +15,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="622.0" prefWidth="857.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.appbh.NhanVienController">
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.appbh.NhanVienController">
    <children>
-      <MenuBar prefHeight="25.0" prefWidth="857.0" style="-fx-background-color: #00CCCC;">
+      <MenuBar prefHeight="25.0" prefWidth="1100.0" style="-fx-background-color: #00CCCC;">
          <menus>
             <Menu mnemonicParsing="false" text="Danh mục">
                <items>
@@ -42,11 +42,11 @@
             </Menu>
          </menus>
       </MenuBar>
-      <HBox prefHeight="83.0" prefWidth="857.0">
+      <HBox prefHeight="83.0" prefWidth="1100.0">
          <children>
-            <Pane prefHeight="83.0" prefWidth="857.0">
+            <Pane prefHeight="83.0" prefWidth="1100.0" style="-fx-background-color: #33FFFF;">
                <children>
-                  <Label layoutX="252.0" layoutY="24.0" text="Danh mục nhân viên">
+                  <Label layoutX="403.0" layoutY="24.0" text="Danh mục nhân viên">
                      <font>
                         <Font name="Arial Bold" size="30.0" />
                      </font>
@@ -55,106 +55,101 @@
             </Pane>
          </children>
       </HBox>
-      <HBox prefHeight="152.0" prefWidth="858.0">
+      <HBox prefHeight="170.0" prefWidth="1100.0">
          <children>
-            <Pane prefHeight="141.0" prefWidth="858.0">
+            <Pane prefHeight="170.0" prefWidth="1100.0" style="-fx-background-color: #CCFFFF;">
                <children>
-                  <Label layoutX="14.0" layoutY="6.0" text="Mã nhân viên">
+                  <Label layoutX="14.0" layoutY="21.0" text="Mã nhân viên">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="426.0" layoutY="7.0" text="Địa chỉ">
+                  <Label layoutX="426.0" layoutY="20.0" text="Địa chỉ">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="idNhanVien" layoutX="118.0" layoutY="2.0" prefHeight="25.0" prefWidth="126.0" />
-                  <TextField fx:id="nameNhanVien" layoutX="118.0" layoutY="43.0" prefHeight="25.0" prefWidth="193.0" />
-                  <Label layoutX="14.0" layoutY="86.0" text="Giới tính">
+                  <TextField fx:id="idNhanVien" layoutX="118.0" layoutY="16.0" prefHeight="25.0" prefWidth="126.0" />
+                  <TextField fx:id="nameNhanVien" layoutX="118.0" layoutY="57.0" prefHeight="25.0" prefWidth="193.0" />
+                  <Label layoutX="14.0" layoutY="100.0" text="Giới tính">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="11.0" layoutY="47.0" text="Tên nhân viên">
+                  <Label layoutX="11.0" layoutY="62.0" text="Tên nhân viên">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="424.0" layoutY="86.0" text="Ngày sinh">
+                  <Label layoutX="424.0" layoutY="100.0" text="Ngày sinh">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="423.0" layoutY="48.0" text="Số điện thoại">
+                  <Label layoutX="426.0" layoutY="60.0" text="Số điện thoại">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="423.0" layoutY="127.0" text="Chi nhánh">
+                  <Label layoutX="423.0" layoutY="141.0" text="Chi nhánh">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="GioiTinhText" layoutX="118.0" layoutY="82.0" prefHeight="25.0" prefWidth="126.0" />
-                  <TextField fx:id="DiaChiText" layoutX="517.0" layoutY="2.0" prefHeight="25.0" prefWidth="333.0" />
-                  <TextField fx:id="SoDienThoaihText" layoutX="517.0" layoutY="44.0" prefHeight="25.0" prefWidth="216.0" />
-                  <DatePicker fx:id="NgaySinhText" layoutX="517.0" layoutY="82.0" prefHeight="25.0" prefWidth="216.0" />
-                  <Button fx:id="SeachByID" layoutX="254.0" layoutY="1.0" mnemonicParsing="false" onAction="#SeacrhStaffByID" prefHeight="10.0" prefWidth="67.0" text="Tìm">
+                  <TextField fx:id="GioiTinhText" layoutX="118.0" layoutY="95.0" prefHeight="25.0" prefWidth="126.0" />
+                  <TextField fx:id="DiaChiText" layoutX="517.0" layoutY="16.0" prefHeight="25.0" prefWidth="333.0" />
+                  <TextField fx:id="SoDienThoaihText" layoutX="517.0" layoutY="57.0" prefHeight="25.0" prefWidth="216.0" />
+                  <DatePicker fx:id="NgaySinhText" layoutX="517.0" layoutY="95.0" prefHeight="25.0" prefWidth="216.0" />
+                  <Button fx:id="SeachByID" layoutX="244.0" layoutY="15.0" mnemonicParsing="false" onAction="#SeacrhStaffByID" prefHeight="23.0" prefWidth="46.0" text="Tìm">
                      <font>
-                        <Font name="Arial Bold" size="15.0" />
+                        <Font name="Arial" size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="SearchByName" layoutX="321.0" layoutY="42.0" mnemonicParsing="false" onAction="#SeacrhStaffByName" prefHeight="27.0" prefWidth="67.0" text="Tìm">
+                  <Button fx:id="SearchByName" layoutX="311.0" layoutY="57.0" mnemonicParsing="false" onAction="#SeacrhStaffByName" prefHeight="23.0" prefWidth="46.0" text="Tìm">
                      <font>
-                        <Font name="Arial Bold" size="15.0" />
+                        <Font name="Arial" size="12.0" />
                      </font>
                   </Button>
-                  <ComboBox fx:id="ListChiNhanh" layoutX="517.0" layoutY="123.0" prefHeight="25.0" prefWidth="237.0" />
+                  <ComboBox fx:id="ListChiNhanh" layoutX="517.0" layoutY="136.0" prefHeight="25.0" prefWidth="237.0" />
                </children>
             </Pane>
          </children>
       </HBox>
-      <HBox prefHeight="300.0" prefWidth="859.0">
+      <HBox prefHeight="322.0" prefWidth="1100.0">
          <children>
-            <TableView fx:id="listNhanVien" onMouseClicked="#g" prefHeight="300.0" prefWidth="858.0">
+            <TableView fx:id="listNhanVien" onMouseClicked="#g" prefHeight="300.0" prefWidth="1100.0">
               <columns>
-                <TableColumn fx:id="id" prefWidth="75.0" text="Mã NV" />
-                <TableColumn fx:id="TenNhanVien" prefWidth="144.0" text="Tên" />
-                  <TableColumn fx:id="GioiTinh" prefWidth="100.0" text="Giới tính" />
-                  <TableColumn fx:id="DiaChi" prefWidth="123.0" text="Địa chỉ" />
-                  <TableColumn fx:id="DienThoai" prefWidth="131.0" text="Điện thoại" />
-                  <TableColumn fx:id="NgaySinh" prefWidth="138.0" text="Ngày sinh" />
-                  <TableColumn fx:id="IDChiNhanh" prefWidth="146.0" text="Chi nhánh" />
+                <TableColumn fx:id="id" prefWidth="87.0" text="Mã NV" />
+                <TableColumn fx:id="TenNhanVien" prefWidth="196.0" text="Tên" />
+                  <TableColumn fx:id="GioiTinh" prefWidth="69.0" text="Giới tính" />
+                  <TableColumn fx:id="DiaChi" prefWidth="186.0" text="Địa chỉ" />
+                  <TableColumn fx:id="DienThoai" prefWidth="170.0" text="Điện thoại" />
+                  <TableColumn fx:id="NgaySinh" prefWidth="152.0" text="Ngày sinh" />
+                  <TableColumn fx:id="IDChiNhanh" prefWidth="239.0" text="Chi nhánh" />
               </columns>
             </TableView>
          </children>
       </HBox>
-      <HBox prefHeight="63.0" prefWidth="857.0">
+      <HBox prefHeight="100.0" prefWidth="1100.0">
          <children>
-            <Pane prefHeight="63.0" prefWidth="858.0">
+            <Pane prefHeight="100.0" prefWidth="1100.0" style="-fx-background-color: #CCFFFF;">
                <children>
-                  <Button layoutX="678.0" layoutY="18.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="67.0" text="Lưu">
+                  <Button layoutX="997.0" layoutY="37.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="67.0" text="Đóng">
                      <font>
                         <Font name="Arial Bold" size="15.0" />
                      </font>
                   </Button>
-                  <Button layoutX="769.0" layoutY="18.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="67.0" text="Đóng">
+                  <Button layoutX="780.0" layoutY="37.0" mnemonicParsing="false" onAction="#deleteNhanVien" prefHeight="27.0" prefWidth="67.0" text="Xóa">
                      <font>
                         <Font name="Arial Bold" size="15.0" />
                      </font>
                   </Button>
-                  <Button layoutX="500.0" layoutY="18.0" mnemonicParsing="false" onAction="#deleteNhanVien" prefHeight="27.0" prefWidth="67.0" text="Xóa">
+                  <Button layoutX="890.0" layoutY="37.0" mnemonicParsing="false" onAction="#UpdateNhanVien" prefHeight="27.0" prefWidth="67.0" text="Sửa">
                      <font>
                         <Font name="Arial Bold" size="15.0" />
                      </font>
                   </Button>
-                  <Button layoutX="589.0" layoutY="18.0" mnemonicParsing="false" onAction="#UpdateNhanVien" prefHeight="27.0" prefWidth="67.0" text="Sửa">
-                     <font>
-                        <Font name="Arial Bold" size="15.0" />
-                     </font>
-                  </Button>
-                  <Button layoutX="408.0" layoutY="18.0" mnemonicParsing="false" onAction="#addNhanVien" prefHeight="27.0" prefWidth="67.0" text="Thêm">
+                  <Button layoutX="670.0" layoutY="37.0" mnemonicParsing="false" onAction="#addNhanVien" prefHeight="27.0" prefWidth="67.0" text="Thêm">
                      <font>
                         <Font name="Arial Bold" size="15.0" />
                      </font>

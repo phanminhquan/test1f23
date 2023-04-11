@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="565.0" prefWidth="932.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.appbh.PrimaryController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.appbh.PrimaryController">
    <top>
       <MenuBar style="-fx-background-color: #00CCCC;" BorderPane.alignment="CENTER">
         <menus>
@@ -58,7 +58,7 @@
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EEEEEE;" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane layoutX="64.0" layoutY="128.0" prefHeight="284.0" prefWidth="405.0" style="-fx-background-color: #33FFFF;">
+            <AnchorPane layoutX="140.0" layoutY="211.0" prefHeight="276.0" prefWidth="426.0" style="-fx-background-color: #33FFFF;">
                <children>
                   <Label layoutX="16.0" layoutY="159.0" text="Mật khẩu">
                      <font>
@@ -70,19 +70,19 @@
                         <Font name="Arial Bold" size="15.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtA" layoutX="112.0" layoutY="103.0" prefHeight="30.0" prefWidth="254.0" />
-                  <PasswordField fx:id="txtB" layoutX="111.0" layoutY="153.0" prefHeight="32.0" prefWidth="255.0" />
-                  <Button layoutX="265.0" layoutY="203.0" mnemonicParsing="false" onAction="#switchToIndex" prefHeight="31.0" prefWidth="100.0" text="Đăng nhập" textFill="#111010">
+                  <TextField fx:id="txtA" layoutX="112.0" layoutY="103.0" prefHeight="35.0" prefWidth="254.0" />
+                  <Button layoutX="265.0" layoutY="203.0" mnemonicParsing="false" onAction="#switchToIndex" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: #CCFFFF;" text="Đăng nhập" textFill="#111010">
                      <font>
                         <Font name="Arial Bold" size="15.0" />
                      </font>
                   </Button>
-                  <Label layoutX="72.0" layoutY="23.0" text="Đăng nhập OU Market">
+                  <Label layoutX="82.0" layoutY="26.0" text="Đăng nhập OU Market" textFill="#e10e0e">
                      <font>
                         <Font name="Arial Bold" size="25.0" />
                      </font>
                   </Label>
                   <Label fx:id="erro" layoutX="110.0" layoutY="63.0" textFill="#fc0505" />
+                  <PasswordField fx:id="txtB" layoutX="112.0" layoutY="153.0" prefHeight="34.0" prefWidth="255.0" />
                </children>
             </AnchorPane>
          </children>

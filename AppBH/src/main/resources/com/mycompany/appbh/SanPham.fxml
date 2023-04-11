@@ -14,9 +14,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="622.0" prefWidth="857.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.appbh.SanPhamController">
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.appbh.SanPhamController">
    <children>
-      <MenuBar prefHeight="25.0" prefWidth="857.0" style="-fx-background-color: #00CCCC;">
+      <MenuBar prefHeight="25.0" prefWidth="1100.0" style="-fx-background-color: #00CCCC;">
          <menus>
             <Menu mnemonicParsing="false" text="Danh mục">
                <items>
@@ -41,11 +41,11 @@
             </Menu>
          </menus>
       </MenuBar>
-      <HBox prefHeight="83.0" prefWidth="857.0">
+      <HBox prefHeight="83.0" prefWidth="1100.0">
          <children>
-            <Pane prefHeight="83.0" prefWidth="857.0">
+            <Pane prefHeight="83.0" prefWidth="1100.0" style="-fx-background-color: #33FFFF;">
                <children>
-                  <Label layoutX="252.0" layoutY="24.0" text="Danh mục sản phẩm">
+                  <Label layoutX="403.0" layoutY="24.0" text="Danh mục sản phẩm">
                      <font>
                         <Font name="Arial Bold" size="30.0" />
                      </font>
@@ -54,127 +54,122 @@
             </Pane>
          </children>
       </HBox>
-      <HBox prefHeight="185.0" prefWidth="858.0">
+      <HBox prefHeight="195.0" prefWidth="1100.0">
          <children>
-            <Pane prefHeight="141.0" prefWidth="858.0">
+            <Pane prefHeight="141.0" prefWidth="1100.0" style="-fx-background-color: #CCFFFF;">
                <children>
-                  <Label layoutX="14.0" layoutY="6.0" text="Mã sản phẩm">
+                  <Label layoutX="14.0" layoutY="21.0" text="Mã sản phẩm">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="426.0" layoutY="7.0" text="Đơn giá nhập">
+                  <Label layoutX="463.0" layoutY="21.0" text="Đơn giá nhập">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="MaHangText" layoutX="118.0" layoutY="2.0" prefHeight="25.0" prefWidth="126.0" />
-                  <TextField fx:id="TenHangText" layoutX="118.0" layoutY="36.0" prefHeight="25.0" prefWidth="248.0" />
-                  <Label layoutX="14.0" layoutY="75.0" text="Loại sản phẩm">
+                  <TextField fx:id="MaHangText" layoutX="118.0" layoutY="16.0" prefHeight="25.0" prefWidth="126.0" />
+                  <TextField fx:id="TenHangText" layoutX="118.0" layoutY="51.0" prefHeight="25.0" prefWidth="248.0" />
+                  <Label layoutX="14.0" layoutY="95.0" text="Loại sản phẩm">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="11.0" layoutY="41.0" text="Tên sản phẩm">
+                  <Label layoutX="11.0" layoutY="56.0" text="Tên sản phẩm">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="424.0" layoutY="75.0" text="Đơn vị tính">
+                  <Label layoutX="465.0" layoutY="90.0" text="Đơn vị tính">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="423.0" layoutY="41.0" text="Đơn giá bán">
+                  <Label layoutX="468.0" layoutY="56.0" text="Đơn giá bán">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="423.0" layoutY="107.0" text="Khuyến mãi">
+                  <Label layoutX="469.0" layoutY="129.0" text="Khuyến mãi">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="DongiaNhapText" layoutX="517.0" layoutY="2.0" prefHeight="25.0" prefWidth="216.0" />
-                  <TextField fx:id="DonGiaBanText" layoutX="517.0" layoutY="36.0" prefHeight="25.0" prefWidth="216.0" />
-                  <Label layoutX="14.0" layoutY="107.0" text="Số lượng">
+                  <TextField fx:id="DongiaNhapText" layoutX="575.0" layoutY="16.0" prefHeight="25.0" prefWidth="216.0" />
+                  <TextField fx:id="DonGiaBanText" layoutX="575.0" layoutY="51.0" prefHeight="25.0" prefWidth="216.0" />
+                  <Label layoutX="10.0" layoutY="129.0" text="Số lượng">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="14.0" layoutY="142.0" text="Ảnh">
+                  <Label layoutX="14.0" layoutY="163.0" text="Ảnh">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="SoLuongText" layoutX="118.0" layoutY="103.0" prefHeight="25.0" prefWidth="126.0" />
-                  <TextField fx:id="AnhText" layoutX="118.0" layoutY="137.0" prefHeight="25.0" prefWidth="248.0" />
-                  <Label layoutX="428.0" layoutY="142.0" text="Ghi chú">
+                  <TextField fx:id="SoLuongText" layoutX="118.0" layoutY="124.0" prefHeight="25.0" prefWidth="126.0" />
+                  <TextField fx:id="AnhText" layoutX="118.0" layoutY="158.0" prefHeight="25.0" prefWidth="248.0" />
+                  <Label layoutX="468.0" layoutY="163.0" text="Ghi chú">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="GhiChuText" layoutX="517.0" layoutY="137.0" prefHeight="25.0" prefWidth="333.0" />
-                  <Button layoutX="242.0" layoutY="2.0" mnemonicParsing="false" onAction="#SeacrhStaffByID" prefHeight="25.0" prefWidth="45.0" text="Tìm">
+                  <TextField fx:id="GhiChuText" layoutX="575.0" layoutY="158.0" prefHeight="25.0" prefWidth="333.0" />
+                  <Button layoutX="242.0" layoutY="16.0" mnemonicParsing="false" onAction="#SeacrhStaffByID" prefHeight="25.0" prefWidth="45.0" text="Tìm">
                      <font>
                         <Font name="Arial Bold" size="11.0" />
                      </font>
                   </Button>
-                  <Button layoutX="364.0" layoutY="36.0" mnemonicParsing="false" onAction="#SeacrhStaffByName" prefHeight="25.0" prefWidth="45.0" text="Tìm">
+                  <Button layoutX="366.0" layoutY="51.0" mnemonicParsing="false" onAction="#SeacrhStaffByName" prefHeight="25.0" prefWidth="45.0" text="Tìm">
                      <font>
                         <Font name="Arial Bold" size="11.0" />
                      </font>
                   </Button>
-                  <ComboBox fx:id="ListLoaiSanPham" layoutX="118.0" layoutY="71.0" prefHeight="25.0" prefWidth="293.0" />
-                  <ComboBox fx:id="ListKhuyenMai" layoutX="517.0" layoutY="103.0" prefHeight="25.0" prefWidth="200.0" />
-                  <ComboBox fx:id="ListDonViTinh" layoutX="516.0" layoutY="71.0" prefHeight="25.0" prefWidth="200.0" />
+                  <ComboBox fx:id="ListLoaiSanPham" layoutX="118.0" layoutY="85.0" prefHeight="25.0" prefWidth="293.0" />
+                  <ComboBox fx:id="ListKhuyenMai" layoutX="575.0" layoutY="124.0" prefHeight="25.0" prefWidth="200.0" />
+                  <ComboBox fx:id="ListDonViTinh" layoutX="575.0" layoutY="85.0" prefHeight="25.0" prefWidth="200.0" />
                </children>
             </Pane>
          </children>
       </HBox>
-      <HBox prefHeight="269.0" prefWidth="859.0">
+      <HBox prefHeight="298.0" prefWidth="1100.0">
          <children>
-            <TableView fx:id="listSanPham" onMouseClicked="#g" prefHeight="300.0" prefWidth="858.0">
+            <TableView fx:id="listSanPham" onMouseClicked="#g" prefHeight="300.0" prefWidth="1100.0">
                <columns>
                   <TableColumn fx:id="MaHang" text="Mã sản phẩm" />
-                  <TableColumn fx:id="TenHang" prefWidth="150.0" text="Tên sản phẩm" />
-                  <TableColumn fx:id="MaLoaiSanPham" prefWidth="110.0" text="Mã loại sản phẩm" />
-                  <TableColumn fx:id="SoLuong" prefWidth="60.0" text="Số lượng" />
-                  <TableColumn fx:id="DonGiaNhap" prefWidth="95.0" text="Đơn giá nhập" />
-                  <TableColumn fx:id="DonGiaBan" prefWidth="95.0" text="Đơn giá bán" />
+                  <TableColumn fx:id="TenHang" prefWidth="164.0" text="Tên sản phẩm" />
+                  <TableColumn fx:id="MaLoaiSanPham" prefWidth="112.0" text="Mã loại sản phẩm" />
+                  <TableColumn fx:id="SoLuong" prefWidth="64.0" text="Số lượng" />
+                  <TableColumn fx:id="DonGiaNhap" prefWidth="103.0" text="Đơn giá nhập" />
+                  <TableColumn fx:id="DonGiaBan" prefWidth="110.0" text="Đơn giá bán" />
                   <TableColumn fx:id="IdKhuyenMai" prefWidth="95.0" text="Khuyến mãi" />
-                  <TableColumn fx:id="DonViTinh" prefWidth="70.0" text="Đơn vị tính" />
-                  <TableColumn fx:id="Anh" prefWidth="100.0" text="Ảnh " />
-                  <TableColumn fx:id="GhiChu" prefWidth="300.0" text="Ghi chú" />
+                  <TableColumn fx:id="DonViTinh" prefWidth="99.0" text="Đơn vị tính" />
+                  <TableColumn fx:id="Anh" prefWidth="105.0" text="Ảnh " />
+                  <TableColumn fx:id="GhiChu" prefWidth="223.0" text="Ghi chú" />
                </columns>
             </TableView>
          </children>
       </HBox>
-      <HBox prefHeight="63.0" prefWidth="857.0">
+      <HBox prefHeight="100.0" prefWidth="1100.0">
          <children>
-            <Pane prefHeight="63.0" prefWidth="858.0">
+            <Pane prefHeight="100.0" prefWidth="1100.0" style="-fx-background-color: #CCFFFF;">
                <children>
-                  <Button layoutX="678.0" layoutY="18.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="67.0" text="Lưu">
+                  <Button layoutX="997.0" layoutY="37.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="67.0" text="Đóng">
                      <font>
                         <Font name="Arial Bold" size="15.0" />
                      </font>
                   </Button>
-                  <Button layoutX="769.0" layoutY="18.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="67.0" text="Đóng">
+                  <Button layoutX="799.0" layoutY="37.0" mnemonicParsing="false" onAction="#deleteSanPham" prefHeight="27.0" prefWidth="67.0" text="Xóa">
                      <font>
                         <Font name="Arial Bold" size="15.0" />
                      </font>
                   </Button>
-                  <Button layoutX="500.0" layoutY="18.0" mnemonicParsing="false" onAction="#deleteSanPham" prefHeight="27.0" prefWidth="67.0" text="Xóa">
+                  <Button layoutX="898.0" layoutY="37.0" mnemonicParsing="false" onAction="#UpdateSanPham" prefHeight="27.0" prefWidth="67.0" text="Sửa">
                      <font>
                         <Font name="Arial Bold" size="15.0" />
                      </font>
                   </Button>
-                  <Button layoutX="589.0" layoutY="18.0" mnemonicParsing="false" onAction="#UpdateSanPham" prefHeight="27.0" prefWidth="67.0" text="Sửa">
-                     <font>
-                        <Font name="Arial Bold" size="15.0" />
-                     </font>
-                  </Button>
-                  <Button layoutX="408.0" layoutY="18.0" mnemonicParsing="false" onAction="#addSanPham" prefHeight="27.0" prefWidth="67.0" text="Thêm">
+                  <Button layoutX="700.0" layoutY="37.0" mnemonicParsing="false" onAction="#addSanPham" prefHeight="27.0" prefWidth="67.0" text="Thêm">
                      <font>
                         <Font name="Arial Bold" size="15.0" />
                      </font>

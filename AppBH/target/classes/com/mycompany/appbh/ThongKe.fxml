@@ -19,11 +19,12 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="826.0" prefWidth="857.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.appbh.ThongKeController">
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.appbh.ThongKeController">
    <children>
-      <MenuBar onMouseClicked="#switchToTrangChu" prefHeight="25.0" prefWidth="857.0" style="-fx-background-color: #00CCCC;">
+      <MenuBar onMouseClicked="#switchToTrangChu" prefHeight="25.0" prefWidth="1100.0" style="-fx-background-color: #00CCCC;">
          <menus>
             <Menu mnemonicParsing="false" text="Danh mục">
                <items>
@@ -48,11 +49,11 @@
             </Menu>
          </menus>
       </MenuBar>
-      <HBox prefHeight="83.0" prefWidth="857.0">
+      <HBox prefHeight="83.0" prefWidth="1100.0">
          <children>
-            <Pane prefHeight="83.0" prefWidth="857.0">
+            <Pane prefHeight="83.0" prefWidth="1100.0" style="-fx-background-color: #33FFFF;">
                <children>
-                  <Label layoutX="292.0" layoutY="24.0" text="Thống kê">
+                  <Label layoutX="483.0" layoutY="24.0" text="Thống kê">
                      <font>
                         <Font name="Arial Bold" size="30.0" />
                      </font>
@@ -61,74 +62,69 @@
             </Pane>
          </children>
       </HBox>
-      <HBox prefHeight="122.0" prefWidth="858.0">
+      <VBox prefHeight="593.0" prefWidth="299.0" style="-fx-background-color: #CCFFFF;">
          <children>
-            <Pane prefHeight="141.0" prefWidth="858.0">
+            <Pane prefHeight="593.0" prefWidth="299.0">
                <children>
-                  <Label layoutX="22.0" layoutY="3.0" text="Tháng">
+                  <Button layoutX="14.0" layoutY="170.0" mnemonicParsing="false" onAction="#ThongKeAll" text="Xem thống kê tất cả" />
+                  <ComboBox fx:id="ListChiNhanh" layoutX="14.0" layoutY="30.0" prefWidth="150.0" />
+                  <Button layoutX="178.0" layoutY="33.0" mnemonicParsing="false" onAction="#ThongKeByChiNHanh" text="Xem " />
+                  <Label layoutX="14.0" layoutY="86.0" text="Tháng">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="Month" layoutX="89.0" layoutY="-1.0" prefHeight="25.0" prefWidth="79.0" />
-                  <Label layoutX="220.0" layoutY="8.0" text="Năm">
+                  <TextField fx:id="Month" layoutX="85.0" layoutY="82.0" prefHeight="25.0" prefWidth="79.0" />
+                  <Label layoutX="14.0" layoutY="128.0" text="Năm">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="Year" layoutX="292.0" layoutY="4.0" prefHeight="25.0" prefWidth="79.0" />
-                  <ComboBox fx:id="ListChiNhanh" layoutX="14.0" layoutY="61.0" prefWidth="150.0" />
-                  <Button layoutX="270.0" layoutY="61.0" mnemonicParsing="false" onAction="#ThongKeAll" text="Xem thống kê tất cả" />
-                  <Button layoutX="181.0" layoutY="61.0" mnemonicParsing="false" onAction="#ThongKeByChiNHanh" text="Xem " />
+                  <TextField fx:id="Year" layoutX="85.0" layoutY="124.0" prefHeight="25.0" prefWidth="79.0" />
                </children>
             </Pane>
          </children>
-      </HBox>
-      <HBox prefHeight="596.0" prefWidth="859.0">
+      </VBox>
+      <VBox prefHeight="593.0" prefWidth="801.0">
          <children>
-            <TabPane prefHeight="431.0" prefWidth="858.0" tabClosingPolicy="UNAVAILABLE">
-              <tabs>
-                <Tab text="Kết quả">
-                  <content>
-                    <AnchorPane fx:id="tk" minHeight="0.0" minWidth="0.0" prefHeight="299.0" prefWidth="544.0">
+            <TabPane prefHeight="592.0" prefWidth="801.0" tabClosingPolicy="UNAVAILABLE">
+               <tabs>
+                  <Tab text="Kết quả">
+                     <content>
+                        <AnchorPane fx:id="tk" minHeight="0.0" minWidth="0.0" prefHeight="299.0" prefWidth="544.0">
                            <children>
-                              <TableView fx:id="bangThongKe" layoutY="8.0" onSort="#ThongKeByChiNHanh" prefHeight="338.0" prefWidth="848.0">
-                                <columns>
-                                  <TableColumn fx:id="TenHang" prefWidth="208.0" text="Tên Hàng" />
-                                  <TableColumn fx:id="SoLuong" prefWidth="156.0" text="Số lượng đã bán" />
-                                    <TableColumn fx:id="Tien" prefWidth="211.0" text="Thành tiền" />
+                              <TableView fx:id="bangThongKe" layoutY="8.0" onSort="#ThongKeByChiNHanh" prefHeight="556.0" prefWidth="848.0">
+                                 <columns>
+                                    <TableColumn fx:id="TenHang" prefWidth="208.0" text="Tên Hàng" />
+                                    <TableColumn fx:id="SoLuong" prefWidth="156.0" text="Số lượng đã bán" />
+                                    <TableColumn fx:id="Tien" prefWidth="211.0" text="Tổng tiền đã bán" />
                                     <TableColumn fx:id="LoaiSP" prefWidth="272.0" text="Loại sản phảm" />
-                                </columns>
+                                 </columns>
                               </TableView>
                            </children>
                         </AnchorPane>
-                  </content>
-                </Tab>
-                <Tab text="Biểu đồ">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="299.0" prefWidth="904.0">
+                     </content>
+                  </Tab>
+                  <Tab text="Biểu đồ">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="299.0" prefWidth="904.0">
                            <children>
-                              <PieChart fx:id="c" layoutX="6.0" layoutY="20.0" prefHeight="394.0" prefWidth="419.0" />
-                              <BarChart fx:id="b" layoutX="433.0" layoutY="40.0" prefHeight="400.0" prefWidth="408.0">
-                                <xAxis>
-                                  <CategoryAxis side="BOTTOM" />
-                                </xAxis>
-                                <yAxis>
-                                  <NumberAxis side="LEFT" />
-                                </yAxis>
+                              <PieChart fx:id="c" layoutX="14.0" layoutY="80.0" prefHeight="404.0" prefWidth="419.0" />
+                              <BarChart fx:id="b" layoutX="433.0" layoutY="80.0" prefHeight="400.0" prefWidth="408.0">
+                                 <xAxis>
+                                    <CategoryAxis side="BOTTOM" />
+                                 </xAxis>
+                                 <yAxis>
+                                    <NumberAxis side="LEFT" />
+                                 </yAxis>
                               </BarChart>
                            </children>
                         </AnchorPane>
-                  </content>
-                </Tab>
-              </tabs>
+                     </content>
+                  </Tab>
+               </tabs>
             </TabPane>
          </children>
-      </HBox>
-      <HBox prefHeight="63.0" prefWidth="857.0">
-         <children>
-            <Pane prefHeight="229.0" prefWidth="858.0" />
-         </children>
-      </HBox>
+      </VBox>
    </children>
 </FlowPane>
