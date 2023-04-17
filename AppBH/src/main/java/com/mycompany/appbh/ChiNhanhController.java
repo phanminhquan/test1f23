@@ -85,6 +85,16 @@ public class ChiNhanhController implements Initializable{
         App.setRoot("Index");
     }
     @FXML
+     private void switchToHoaDon() throws IOException
+     {
+         App.setRoot("HoaDon");
+     }
+    @FXML
+     private void switchToThongKe() throws IOException
+     {
+         App.setRoot("ThongKe");
+     }
+    @FXML
     private void LogOut() throws IOException, SQLException {
         UserSession.cleanUserSession();
         App.setRoot("primary");

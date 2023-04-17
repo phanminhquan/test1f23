@@ -49,7 +49,7 @@ public class SanPhamService {
         try (Connection conn = JdbcUtils.getConn()) {
             String sql = "SELECT * FROM tblhang";
             if (ID != null && !ID.isEmpty())
-                sql += " WHERE MaHang = ?";
+                sql += " WHERE MaHang like concat('%', ?, '%')";
             
             PreparedStatement stm = conn.prepareCall(sql);
             if (ID != null && !ID.isEmpty())

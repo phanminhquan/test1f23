@@ -42,7 +42,7 @@ public class ChiNhanhService {
         try (Connection conn = JdbcUtils.getConn()) {
             String sql = "SELECT * FROM tblchinhanh";
             if (ID != null && !ID.isEmpty())
-                sql += " WHERE id = ?";
+                sql += " WHERE id like concat('%', ?, '%')";
             
             PreparedStatement stm = conn.prepareCall(sql);
             if (ID != null && !ID.isEmpty())

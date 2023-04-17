@@ -39,7 +39,7 @@ public class LoaiSanPhamService {
         try (Connection conn = JdbcUtils.getConn()) {
             String sql = "SELECT * FROM tblloaisanpham";
             if (ID != null && !ID.isEmpty())
-                sql += " WHERE MaLoaiSanPham = ?";
+                sql += " WHERE MaLoaiSanPham like concat('%', ?, '%')";
             
             PreparedStatement stm = conn.prepareCall(sql);
             if (ID != null && !ID.isEmpty())

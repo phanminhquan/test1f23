@@ -40,7 +40,7 @@ public class KhachHangService {
         try (Connection conn = JdbcUtils.getConn()) {
             String sql = "SELECT * FROM tblkhach";
             if (ID != null && !ID.isEmpty())
-                sql += " WHERE MaKhach = ?";
+                sql += " WHERE MaKhach like concat('%', ?, '%')";
             
             PreparedStatement stm = conn.prepareCall(sql);
             if (ID != null && !ID.isEmpty())

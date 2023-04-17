@@ -19,7 +19,7 @@
          <children>
             <HBox prefHeight="83.0" prefWidth="848.0">
                <children>
-                  <Pane prefHeight="83.0" prefWidth="848.0" style="-fx-background-color: #33FFFF;">
+                  <Pane prefHeight="83.0" prefWidth="840.0" style="-fx-background-color: #33FFFF;">
                      <children>
                         <Label layoutX="252.0" layoutY="24.0" text="Danh mục  khách hàng">
                            <font>

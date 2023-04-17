@@ -101,6 +101,16 @@ public class KhachHangController implements Initializable {
     private void switchToSanPham() throws IOException, SQLException {
         App.setRoot("SanPham");
     }
+    @FXML
+     private void switchToHoaDon() throws IOException
+     {
+         App.setRoot("HoaDon");
+     }
+    @FXML
+     private void switchToThongKe() throws IOException
+     {
+         App.setRoot("ThongKe");
+     }
      @FXML
      private void switchToTrangChu() throws IOException 
     {
@@ -135,22 +145,34 @@ public class KhachHangController implements Initializable {
         this.TenKhachHang.setText("");
         String MaKhachHang = this.MaKhachHang.getText();
         List<KhachHang> khachhang = KhachHangService.GetKhachHangByID(MaKhachHang);
+        if(khachhang.isEmpty())
+            MessageBox.getBox("Thông báo", "Không tìm thấy mã khách hàng phù hợp!!!", 
+                    Alert.AlertType.INFORMATION).show();
+        else
+        {
         this.MaKhach.setCellValueFactory(new PropertyValueFactory<KhachHang, String>("MaKhach"));
         this.TenKhach.setCellValueFactory(new PropertyValueFactory<KhachHang, String>("TenKhach"));
         this.DienThoai.setCellValueFactory(new PropertyValueFactory<KhachHang, String>("DienThoai"));
         this.DiaChi.setCellValueFactory(new PropertyValueFactory<KhachHang, String>("DiaChi"));
         this.getListKhachHang().setItems(FXCollections.observableArrayList(khachhang));
+        }
     }
 
     public void SeacrhCustomerByName() throws SQLException {
         this.MaKhachHang.setText("");
         String TenKhachHang = this.TenKhachHang.getText();
         List<KhachHang> khachhang = KhachHangService.GetKhachHangByName(TenKhachHang);
+        if(khachhang.isEmpty())
+            MessageBox.getBox("Thông báo", "Không tìm thấy khách hàng phù hợp!!!", 
+                    Alert.AlertType.INFORMATION).show();
+        else
+        {
         this.MaKhach.setCellValueFactory(new PropertyValueFactory<KhachHang, String>("MaKhach"));
         this.TenKhach.setCellValueFactory(new PropertyValueFactory<KhachHang, String>("TenKhach"));
         this.DienThoai.setCellValueFactory(new PropertyValueFactory<KhachHang, String>("DienThoai"));
         this.DiaChi.setCellValueFactory(new PropertyValueFactory<KhachHang, String>("DiaChi"));
         this.getListKhachHang().setItems(FXCollections.observableArrayList(khachhang));
+        }
 
     }
 

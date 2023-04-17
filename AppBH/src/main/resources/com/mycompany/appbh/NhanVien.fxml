@@ -19,6 +19,11 @@
    <children>
       <MenuBar prefHeight="25.0" prefWidth="1100.0" style="-fx-background-color: #00CCCC;">
          <menus>
+            <Menu mnemonicParsing="false" text="Trang chủ">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#switchToTrangChu" text="Trở về trang chủ" />
+               </items>
+            </Menu>
             <Menu mnemonicParsing="false" text="Danh mục">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#switchToLoaiSanPham" text="Loại sản phẩm" />
@@ -26,18 +31,17 @@
                   <MenuItem mnemonicParsing="false" onAction="#switchToKhachHang" text="Khách Hàng" />
                   <MenuItem mnemonicParsing="false" onAction="#switchToSanPham" text="Sản phẩm" />
                   <MenuItem mnemonicParsing="false" onAction="#switchToChiNhanh" text="Chi nhánh" />
-                  <MenuItem mnemonicParsing="false" onAction="#switchToTrangChu" text="Trang chủ" />
                   <MenuItem mnemonicParsing="false" onAction="#LogOut" text="Đăng xuất" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Hóa đơn">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Tìm kiếm hóa đơn" />
+                  <MenuItem mnemonicParsing="false" onAction="#switchToHoaDon" text="Tìm kiếm hóa đơn" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Báo cáo">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Doanh thu" />
+                  <MenuItem mnemonicParsing="false" onAction="#switchToThongKe" text="Doanh thu" />
                </items>
             </Menu>
          </menus>
@@ -134,7 +138,7 @@
          <children>
             <Pane prefHeight="100.0" prefWidth="1100.0" style="-fx-background-color: #CCFFFF;">
                <children>
-                  <Button layoutX="997.0" layoutY="37.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="67.0" text="Đóng">
+                  <Button layoutX="997.0" layoutY="37.0" mnemonicParsing="false" onAction="#switchToTrangChu" prefHeight="27.0" prefWidth="67.0" text="Đóng">
                      <font>
                         <Font name="Arial Bold" size="15.0" />
                      </font>

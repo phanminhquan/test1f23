@@ -70,7 +70,16 @@ public class LoaiSanPhamController implements Initializable{
     {
         App.setRoot("Index");
     }
-    
+    @FXML
+     private void switchToHoaDon() throws IOException
+     {
+         App.setRoot("HoaDon");
+     }
+    @FXML
+     private void switchToThongKe() throws IOException
+     {
+         App.setRoot("ThongKe");
+     }
     @FXML
     private void switchToSanPham() throws IOException, SQLException {
         App.setRoot("SanPham");
@@ -98,9 +107,15 @@ public class LoaiSanPhamController implements Initializable{
         this.TenLoaiSPText.setText("");
         String idLoaiSP = this.idLoaiSPText.getText();
         List<LoaiSanPham> LoaiSP = LoaiSanPhamService.GetLoaiSanPhamByID(idLoaiSP);
-        this.MaLoaiSanPham.setCellValueFactory(new PropertyValueFactory<LoaiSanPham, String>("MaLoaiSanPham"));
-        this.TenLoaiSanPham.setCellValueFactory(new PropertyValueFactory<LoaiSanPham, String>("TenLoaiSanPham"));
-        this.listLoaiSanPham.setItems(FXCollections.observableArrayList(LoaiSP));
+        if(LoaiSP.isEmpty())
+            MessageBox.getBox("Thông báo", "Không tìm thấy mã loại sản phẩm phù hợp!!!", 
+                    Alert.AlertType.INFORMATION).show();
+        else
+        {
+            this.MaLoaiSanPham.setCellValueFactory(new PropertyValueFactory<LoaiSanPham, String>("MaLoaiSanPham"));
+            this.TenLoaiSanPham.setCellValueFactory(new PropertyValueFactory<LoaiSanPham, String>("TenLoaiSanPham"));
+            this.listLoaiSanPham.setItems(FXCollections.observableArrayList(LoaiSP));
+        }
     }
     
     public void addLoaiSanPham() throws IOException{

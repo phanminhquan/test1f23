@@ -150,7 +150,16 @@ public class SanPhamController implements Initializable{
     private void switchToSanPham() throws IOException, SQLException {
         App.setRoot("SanPham");
     }
-   
+    @FXML
+     private void switchToHoaDon() throws IOException
+     {
+         App.setRoot("HoaDon");
+     }
+    @FXML
+     private void switchToThongKe() throws IOException
+     {
+         App.setRoot("ThongKe");
+     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {

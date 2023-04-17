@@ -26,25 +26,29 @@
    <children>
       <MenuBar onMouseClicked="#switchToTrangChu" prefHeight="25.0" prefWidth="1100.0" style="-fx-background-color: #00CCCC;">
          <menus>
+            <Menu mnemonicParsing="false" text="Trang chủ">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#switchToTrangChu" text="Trở về trang chủ" />
+               </items>
+            </Menu>
             <Menu mnemonicParsing="false" text="Danh mục">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Loại sản phẩm" />
-                  <MenuItem mnemonicParsing="false" text="Nhân Viên" />
-                  <MenuItem mnemonicParsing="false" text="Khách Hàng" />
-                  <MenuItem mnemonicParsing="false" text="Sản phẩm" />
-                  <MenuItem mnemonicParsing="false" text="Chi nhánh" />
-                  <MenuItem mnemonicParsing="false" onAction="#switchToTrangChu" text="Trang chủ" />
+                  <MenuItem mnemonicParsing="false" onAction="#switchToLoaiSanPham" text="Loại sản phẩm" />
+                  <MenuItem mnemonicParsing="false" onAction="#switchToNhanVien" text="Nhân Viên" />
+                  <MenuItem mnemonicParsing="false" onAction="#switchToKhachHang" text="Khách Hàng" />
+                  <MenuItem mnemonicParsing="false" onAction="#switchToSanPham" text="Sản phẩm" />
+                  <MenuItem mnemonicParsing="false" onAction="#switchToChiNhanh" text="Chi nhánh" />
                   <MenuItem mnemonicParsing="false" onAction="#LogOut" text="Đăng xuất" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Hóa đơn">
                <items>
-                  <MenuItem mnemonicParsing="false" text="tìm kiếm hóa đơn" />
+                  <MenuItem mnemonicParsing="false" onAction="#switchToHoaDon" text="tìm kiếm hóa đơn" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Báo cáo">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Doanh thu" />
+                  <MenuItem mnemonicParsing="false" onAction="#switchToThongKe" text="Doanh thu" />
                </items>
             </Menu>
          </menus>
@@ -81,6 +85,7 @@
                      </font>
                   </Label>
                   <TextField fx:id="Year" layoutX="85.0" layoutY="124.0" prefHeight="25.0" prefWidth="79.0" />
+                  <Button layoutX="229.0" layoutY="554.0" mnemonicParsing="false" onAction="#switchToTrangChu" prefHeight="25.0" prefWidth="56.0" text="Đóng" />
                </children>
             </Pane>
          </children>
