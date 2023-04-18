@@ -58,7 +58,7 @@ public class ChiNhanhService {
     }
     }
     
-    public boolean addChiNhanh(String DiaChi) throws SQLException{
+    public static boolean addChiNhanh(String DiaChi) throws SQLException{
   
         try(Connection conn = JdbcUtils.getConn()){
             int dem = 0;

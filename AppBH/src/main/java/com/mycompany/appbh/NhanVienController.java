@@ -163,58 +163,122 @@ public class NhanVienController implements Initializable {
 
     public void SeacrhStaffByID() throws SQLException {
         this.nameNhanVien.setText("");
-        String idNhanVien = this.idNhanVien.getText();
-        List<NhanVien> nhanVien = NhanVienService.GetNhanVienByID(idNhanVien);
+        String idVien = this.idNhanVien.getText();
+        List<NhanVien> nhanVien = NhanVienService.GetNhanVienByID(idVien);
         if(this.idNhanVien.getText().isEmpty())
         {
-            MessageBox.getBox("Nhân viên", "Bạn phải nhập dữ liệu cần tìm!!!",
+            MessageBox.getBox("Nhân Viên", "Bạn phải nhập dữ liệu cần tìm!!!",
                     Alert.AlertType.INFORMATION).show();
         }
-        this.id.setCellValueFactory(new PropertyValueFactory<NhanVien, String>("MaNV"));
-        this.TenNhanVien.setCellValueFactory(new PropertyValueFactory<NhanVien, String>("TenNV"));
-        this.GioiTinh.setCellValueFactory(new PropertyValueFactory<NhanVien, String>("GioiTinh"));
-        this.DiaChi.setCellValueFactory(new PropertyValueFactory<NhanVien, String>("DiaChi"));
-        this.DienThoai.setCellValueFactory(new PropertyValueFactory<NhanVien, String>("DienThoai"));
-        this.NgaySinh.setCellValueFactory(new PropertyValueFactory<NhanVien, Date>("NgaySinh"));
-        this.IDChiNhanh.setCellValueFactory(new PropertyValueFactory<NhanVien, Integer>("IDChiNhanh"));
-        this.listNhanVien.setItems(FXCollections.observableArrayList(nhanVien));
+        else
+        {
+            if (nhanVien.isEmpty())
+                MessageBox.getBox("Thông báo", "Không tìm thấy mã nhân viên phù hợp!!!",
+                        Alert.AlertType.INFORMATION).show();
+            else {
+                this.id.setCellValueFactory(new PropertyValueFactory<NhanVien, String>("MaNV"));
+                this.TenNhanVien.setCellValueFactory(new PropertyValueFactory<NhanVien, String>("TenNV"));
+                this.GioiTinh.setCellValueFactory(new PropertyValueFactory<NhanVien, String>("GioiTinh"));
+                this.DiaChi.setCellValueFactory(new PropertyValueFactory<NhanVien, String>("DiaChi"));
+                this.DienThoai.setCellValueFactory(new PropertyValueFactory<NhanVien, String>("DienThoai"));
+                this.NgaySinh.setCellValueFactory(new PropertyValueFactory<NhanVien, Date>("NgaySinh"));
+                this.IDChiNhanh.setCellValueFactory(new PropertyValueFactory<NhanVien, Integer>("IDChiNhanh"));
+                this.listNhanVien.setItems(FXCollections.observableArrayList(nhanVien));
+            }
+        }
+        
     }
 
     public void SeacrhStaffByName() throws SQLException {
         this.idNhanVien.setText("");
         String nameNhanVien = this.nameNhanVien.getText();
         List<NhanVien> nhanVien = NhanVienService.GetNhanVienByName(nameNhanVien);
-        this.id.setCellValueFactory(new PropertyValueFactory<NhanVien, String>("MaNV"));
-        this.TenNhanVien.setCellValueFactory(new PropertyValueFactory<NhanVien, String>("TenNV"));
-        this.GioiTinh.setCellValueFactory(new PropertyValueFactory<NhanVien, String>("GioiTinh"));
-        this.DiaChi.setCellValueFactory(new PropertyValueFactory<NhanVien, String>("DiaChi"));
-        this.DienThoai.setCellValueFactory(new PropertyValueFactory<NhanVien, String>("DienThoai"));
-        this.NgaySinh.setCellValueFactory(new PropertyValueFactory<NhanVien, Date>("NgaySinh"));
-        this.IDChiNhanh.setCellValueFactory(new PropertyValueFactory<NhanVien, Integer>("IDChiNhanh"));
-        this.listNhanVien.setItems(FXCollections.observableArrayList(nhanVien));
+        if(this.nameNhanVien.getText().isEmpty())
+        {
+            MessageBox.getBox("Nhân Viên", "Bạn phải nhập dữ liệu cần tìm!!!",
+                    Alert.AlertType.INFORMATION).show();
+        }
+        else
+        {
+            if (nhanVien.isEmpty())
+                MessageBox.getBox("Thông báo", "Không tìm thấy tên nhân viên phù hợp!!!",
+                        Alert.AlertType.INFORMATION).show();
+            else {
+                this.id.setCellValueFactory(new PropertyValueFactory<NhanVien, String>("MaNV"));
+                this.TenNhanVien.setCellValueFactory(new PropertyValueFactory<NhanVien, String>("TenNV"));
+                this.GioiTinh.setCellValueFactory(new PropertyValueFactory<NhanVien, String>("GioiTinh"));
+                this.DiaChi.setCellValueFactory(new PropertyValueFactory<NhanVien, String>("DiaChi"));
+                this.DienThoai.setCellValueFactory(new PropertyValueFactory<NhanVien, String>("DienThoai"));
+                this.NgaySinh.setCellValueFactory(new PropertyValueFactory<NhanVien, Date>("NgaySinh"));
+                this.IDChiNhanh.setCellValueFactory(new PropertyValueFactory<NhanVien, Integer>("IDChiNhanh"));
+                this.listNhanVien.setItems(FXCollections.observableArrayList(nhanVien));
+            }
+        }
+        
     }
 
     public void addNhanVien() throws IOException {
         String sdt = this.SoDienThoaihText.getText();
         String name = this.nameNhanVien.getText();
-        String GioiTinh = this.GioiTinhText.getText();
-        String DiaChi = this.DiaChiText.getText();
-        LocalDate dateIns = this.NgaySinhText.getValue();
-        Instant instant = Instant.from(dateIns.atStartOfDay(ZoneId.systemDefault()));
-        Date NgaySinh = Date.from(instant);
-        int idChiNhanh = ListChiNhanh.getSelectionModel().getSelectedItem().getId();
-
-        NhanVienService s = new NhanVienService();
-        try {
-            s.addNhanVien(name, GioiTinh, DiaChi, sdt, NgaySinh, idChiNhanh);
-            MessageBox.getBox("Nhân viên", "Thêm nhân viên thành công!!!",
+        if (name.trim().equals("") || this.DiaChiText.getText().trim().equals("") || this.SoDienThoaihText.getText().trim().equals("") || this.GioiTinhText.getText().trim().equals("")) {
+            MessageBox.getBox("Thông báo", "Vui lòng nhập đầy đủ thông tin!!!",
                     Alert.AlertType.INFORMATION).show();
-        } catch (SQLException ex) {
-            Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
-            MessageBox.getBox("Nhân viên", "Thêm nhân viên thất bại!!!",
-                    Alert.AlertType.ERROR).show();
+        } else {
+            boolean kt1 = false;
+            for (int i = 0; i < name.replaceAll(" ", "").length(); i++) {
+
+                if (!Character.isLetter(name.replaceAll(" ", "").charAt(i))) {
+                    kt1 = true;
+                    break;
+                }
+            }
+            if (kt1) {
+                MessageBox.getBox("Nhân Viên", "Tên nhân viên không đúng định dạng!!!",
+                        Alert.AlertType.INFORMATION).show();
+            } else {
+                boolean kt = false;
+                for (int i = 0; i < sdt.length(); i++) {
+
+                    int so = sdt.charAt(i);
+                    if (so < 48 || so > 57) {
+                        kt = true;
+                        break;
+                    }
+                }
+                int so = sdt.length();
+                String dt = sdt.substring(0, 1);
+                if (!dt.equals("0") || so != 10 || kt) {
+                    MessageBox.getBox("Nhân Viên", "Số điện thoại không đúng định dạng!!!",
+                            Alert.AlertType.INFORMATION).show();
+                } else {
+                    String GioiTinh = this.GioiTinhText.getText();
+                    String test = GioiTinh.toLowerCase().trim();
+                    if (!test.equals("nam") && !test.equals("nữ") && !test.equals("nu")) {
+                        MessageBox.getBox("Nhân Viên", "giới tính phải là nam hoặc nữ!!!",
+                                Alert.AlertType.INFORMATION).show();
+                    } else {
+                        String DiaChi = this.DiaChiText.getText();
+                        LocalDate dateIns = this.NgaySinhText.getValue();
+                        Instant instant = Instant.from(dateIns.atStartOfDay(ZoneId.systemDefault()));
+                        Date NgaySinh = Date.from(instant);
+                        int idChiNhanh = ListChiNhanh.getSelectionModel().getSelectedItem().getId();
+
+                        NhanVienService s = new NhanVienService();
+                        try {
+                            s.addNhanVien(name, GioiTinh, DiaChi, sdt, NgaySinh, idChiNhanh);
+                            MessageBox.getBox("Nhân viên", "Thêm nhân viên thành công!!!",
+                                    Alert.AlertType.INFORMATION).show();
+                        } catch (SQLException ex) {
+                            Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
+                            MessageBox.getBox("Nhân viên", "Thêm nhân viên thất bại!!!",
+                                    Alert.AlertType.ERROR).show();
+                        }
+                        App.setRoot("NhanVien");
+                    }
+
+                }
+            }
         }
-        App.setRoot("NhanVien");
 
     }
     String IDTextBox = null;
@@ -241,15 +305,55 @@ public class NhanVienController implements Initializable {
             if (id.equals(IDTextBox)) {
                 String sdt = this.SoDienThoaihText.getText();
                 String name = this.nameNhanVien.getText();
-                String GioiTinh = this.GioiTinhText.getText();
-                String DiaChi = this.DiaChiText.getText();
-                LocalDate dateIns = this.NgaySinhText.getValue();
-                Instant instant = Instant.from(dateIns.atStartOfDay(ZoneId.systemDefault()));
-                Date NgaySinh = Date.from(instant);
-                int idChiNhanh = ListChiNhanh.getSelectionModel().getSelectedItem().getId();
-                NhanVienService.updateNhanVien(id, name, GioiTinh, DiaChi, sdt, NgaySinh, idChiNhanh);
-                MessageBox.getBox("Nhân viên", "Sửa nhân viên thành công!!!",
-                        Alert.AlertType.INFORMATION).show();
+                if (name.trim().equals("") || this.DiaChiText.getText().trim().equals("") || this.SoDienThoaihText.getText().trim().equals("") || this.GioiTinhText.getText().trim().equals("")) {
+                    MessageBox.getBox("Thông báo", "Vui lòng nhập đầy đủ thông tin!!!",
+                            Alert.AlertType.INFORMATION).show();
+                } else {
+                    boolean kt1 = false;
+                    for (int i = 0; i < name.replaceAll(" ", "").length(); i++) {
+
+                        if (!Character.isLetter(name.replaceAll(" ", "").charAt(i))) {
+                            kt1 = true;
+                            break;
+                        }
+                    }
+                    if (kt1) {
+                        MessageBox.getBox("Nhân Viên", "Tên khách hàng không đúng định dạng!!!",
+                                Alert.AlertType.INFORMATION).show();
+                    } else {
+                        boolean kt = false;
+                        for (int i = 0; i < sdt.length(); i++) {
+                            int so = sdt.charAt(i);
+                            if (so < 48 || so > 57) {
+                                kt = true;
+                                break;
+                            }
+                        }
+                        if (sdt.length() != 10 || !sdt.substring(0, 1).equals("0") || kt) {
+                            MessageBox.getBox("Nhân Viên", "Số điện thoại không đúng định dạng!!!",
+                                    Alert.AlertType.INFORMATION).show();
+                        } else {
+                            String GioiTinh = this.GioiTinhText.getText();
+                            String test = GioiTinh.toLowerCase().trim();
+                            if (!test.equals("nam") && !test.equals("nữ") && !test.equals("nu")) {
+                                MessageBox.getBox("Nhân Viên", "giới tính phải là nam hoặc nữ!!!",
+                                        Alert.AlertType.INFORMATION).show();
+                            } else {
+                                String DiaChi = this.DiaChiText.getText();
+                                LocalDate dateIns = this.NgaySinhText.getValue();
+                                Instant instant = Instant.from(dateIns.atStartOfDay(ZoneId.systemDefault()));
+                                Date NgaySinh = Date.from(instant);
+                                int idChiNhanh = ListChiNhanh.getSelectionModel().getSelectedItem().getId();
+                                NhanVienService.updateNhanVien(id, name, GioiTinh, DiaChi, sdt, NgaySinh, idChiNhanh);
+                                MessageBox.getBox("Nhân viên", "Sửa nhân viên thành công!!!",
+                                        Alert.AlertType.INFORMATION).show();
+                            }
+
+                        }
+
+                    }
+                }
+
             } else {
                 MessageBox.getBox("Nhân viên", " Không được sửa mã nhân viên!!!",
                         Alert.AlertType.ERROR).show();

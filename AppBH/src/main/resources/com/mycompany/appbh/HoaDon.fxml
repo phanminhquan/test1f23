@@ -109,7 +109,7 @@
          <children>
             <Pane prefHeight="100.0" prefWidth="1100.0" style="-fx-background-color: #CCFFFF;">
                <children>
-                  <Button layoutX="842.0" layoutY="37.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="86.0" text="Tìm kiếm">
+                  <Button layoutX="842.0" layoutY="37.0" mnemonicParsing="false" onAction="#SearchAll" prefHeight="27.0" prefWidth="86.0" text="Tìm kiếm">
                      <font>
                         <Font name="Arial Bold" size="15.0" />
                      </font>

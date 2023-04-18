@@ -145,16 +145,23 @@ public class KhachHangController implements Initializable {
         this.TenKhachHang.setText("");
         String MaKhachHang = this.MaKhachHang.getText();
         List<KhachHang> khachhang = KhachHangService.GetKhachHangByID(MaKhachHang);
-        if(khachhang.isEmpty())
-            MessageBox.getBox("Thông báo", "Không tìm thấy mã khách hàng phù hợp!!!", 
+        if(this.MaKhachHang.getText().isEmpty())
+        {
+            MessageBox.getBox("Khách Hàng", "Bạn phải nhập dữ liệu cần tìm!!!",
                     Alert.AlertType.INFORMATION).show();
+        }
         else
         {
-        this.MaKhach.setCellValueFactory(new PropertyValueFactory<KhachHang, String>("MaKhach"));
-        this.TenKhach.setCellValueFactory(new PropertyValueFactory<KhachHang, String>("TenKhach"));
-        this.DienThoai.setCellValueFactory(new PropertyValueFactory<KhachHang, String>("DienThoai"));
-        this.DiaChi.setCellValueFactory(new PropertyValueFactory<KhachHang, String>("DiaChi"));
-        this.getListKhachHang().setItems(FXCollections.observableArrayList(khachhang));
+            if (khachhang.isEmpty())
+                MessageBox.getBox("Thông báo", "Không tìm thấy mã khách hàng phù hợp!!!",
+                        Alert.AlertType.INFORMATION).show();
+            else {
+                this.MaKhach.setCellValueFactory(new PropertyValueFactory<KhachHang, String>("MaKhach"));
+                this.TenKhach.setCellValueFactory(new PropertyValueFactory<KhachHang, String>("TenKhach"));
+                this.DienThoai.setCellValueFactory(new PropertyValueFactory<KhachHang, String>("DienThoai"));
+                this.DiaChi.setCellValueFactory(new PropertyValueFactory<KhachHang, String>("DiaChi"));
+                this.getListKhachHang().setItems(FXCollections.observableArrayList(khachhang));
+            }
         }
     }
 
@@ -162,39 +169,81 @@ public class KhachHangController implements Initializable {
         this.MaKhachHang.setText("");
         String TenKhachHang = this.TenKhachHang.getText();
         List<KhachHang> khachhang = KhachHangService.GetKhachHangByName(TenKhachHang);
-        if(khachhang.isEmpty())
-            MessageBox.getBox("Thông báo", "Không tìm thấy khách hàng phù hợp!!!", 
+        if(this.TenKhachHang.getText().isEmpty())
+        {
+            MessageBox.getBox("Khách Hàng", "Bạn phải nhập dữ liệu cần tìm!!!",
                     Alert.AlertType.INFORMATION).show();
+        }
         else
         {
-        this.MaKhach.setCellValueFactory(new PropertyValueFactory<KhachHang, String>("MaKhach"));
-        this.TenKhach.setCellValueFactory(new PropertyValueFactory<KhachHang, String>("TenKhach"));
-        this.DienThoai.setCellValueFactory(new PropertyValueFactory<KhachHang, String>("DienThoai"));
-        this.DiaChi.setCellValueFactory(new PropertyValueFactory<KhachHang, String>("DiaChi"));
-        this.getListKhachHang().setItems(FXCollections.observableArrayList(khachhang));
+            if (khachhang.isEmpty())
+                MessageBox.getBox("Thông báo", "Không tìm thấy tên khách hàng phù hợp!!!",
+                        Alert.AlertType.INFORMATION).show();
+            else {
+                this.MaKhach.setCellValueFactory(new PropertyValueFactory<KhachHang, String>("MaKhach"));
+                this.TenKhach.setCellValueFactory(new PropertyValueFactory<KhachHang, String>("TenKhach"));
+                this.DienThoai.setCellValueFactory(new PropertyValueFactory<KhachHang, String>("DienThoai"));
+                this.DiaChi.setCellValueFactory(new PropertyValueFactory<KhachHang, String>("DiaChi"));
+                this.getListKhachHang().setItems(FXCollections.observableArrayList(khachhang));
+            }
         }
+        
 
     }
 
     public void addKhachHang() throws IOException, SQLException {
         String name = this.TenKhachHang.getText();
-        String dienthoai = this.DienThoaiText.getText();
-        String DiaChi = this.DiaChiText.getText();
-        LocalDate dateIns = this.NgaySinhKH.getValue();
-        Instant instant = Instant.from(dateIns.atStartOfDay(ZoneId.systemDefault()));
-        Date birth = Date.from(instant);
-        KhachHangService s = new KhachHangService();
-        try {
-            s.addKhachHang(name, dienthoai, DiaChi,birth);
-            MessageBox.getBox("Question", "Thêm khách hàng thành công!!!",
+        if (name.trim().equals("") || this.DiaChiText.getText().trim().equals("") || this.DienThoaiText.getText().trim().equals("")) {
+            MessageBox.getBox("Thông báo", "Vui lòng nhập đầy đủ thông tin!!!",
                     Alert.AlertType.INFORMATION).show();
-        } catch (SQLException ex) {
-            Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
-            MessageBox.getBox("Question", "Thêm khách hàng thất bại!!!",
-                    Alert.AlertType.ERROR).show();
+        } else {
+            boolean kt1 = false;
+            for (int i = 0; i < name.replaceAll(" ", "").length(); i++) {
+
+                if (!Character.isLetter(name.replaceAll(" ", "").charAt(i))) {
+                    kt1 = true;
+                    break;
+                }
+            }
+            if (kt1) {
+                MessageBox.getBox("Khách Hàng", "Tên khách hàng không đúng định dạng!!!",
+                        Alert.AlertType.INFORMATION).show();
+            } else {
+                String dienthoai = this.DienThoaiText.getText();
+                boolean kt = false;
+                for (int i = 0; i < dienthoai.length(); i++) {
+
+                    int so = dienthoai.charAt(i);
+                    if (so < 48 || so > 57) {
+                        kt = true;
+                        break;
+                    }
+                }
+                int so = dienthoai.length();
+                String dt = dienthoai.substring(0, 1);
+                if (!dt.equals("0") || so != 10 || kt) {
+                    MessageBox.getBox("Khách Hàng", "Số điện thoại không đúng định dạng!!!",
+                            Alert.AlertType.INFORMATION).show();
+                } else {
+                    String DiaChi = this.DiaChiText.getText();
+                    LocalDate dateIns = this.NgaySinhKH.getValue();
+                    Instant instant = Instant.from(dateIns.atStartOfDay(ZoneId.systemDefault()));
+                    Date birth = Date.from(instant);
+                    KhachHangService s = new KhachHangService();
+                    try {
+                        s.addKhachHang(name, DiaChi, dienthoai, birth);
+                        MessageBox.getBox("Question", "Thêm khách hàng thành công!!!",
+                                Alert.AlertType.INFORMATION).show();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
+                        MessageBox.getBox("Question", "Thêm khách hàng thất bại!!!",
+                                Alert.AlertType.ERROR).show();
+                    }
+                    this.addToTableList();
+                    this.listKhachHang.refresh();
+                }
+            }
         }
-        this.addToTableList();
-        this.listKhachHang.refresh();
 
     }
     
@@ -218,14 +267,46 @@ public class KhachHangController implements Initializable {
 
             if (id.equals(IDTextBox)) {
                 String tenKhach = this.TenKhachHang.getText();
-                String diachi = this.DiaChiText.getText();
-                String dienthoai = this.DienThoaiText.getText();                
-                LocalDate dateIns = this.NgaySinhKH.getValue();
-                Instant instant = Instant.from(dateIns.atStartOfDay(ZoneId.systemDefault()));
-                Date NgaySinh = Date.from(instant);
-                KhachHangService.updateKhachHang(id, tenKhach, diachi, dienthoai, NgaySinh);
-                MessageBox.getBox("Khách Hàng", "Sửa khách hàng thành công!!!",
-                        Alert.AlertType.INFORMATION).show();
+                if (tenKhach.trim().equals("") || this.DiaChiText.getText().trim().equals("") || this.DienThoaiText.getText().trim().equals("")) {
+                    MessageBox.getBox("Thông báo", "Vui lòng nhập đầy đủ thông tin!!!",
+                            Alert.AlertType.INFORMATION).show();
+                } else {
+                    boolean kt1 = false;
+                    for (int i = 0; i < tenKhach.replaceAll(" ", "").length(); i++) {
+
+                        if (!Character.isLetter(tenKhach.replaceAll(" ", "").charAt(i))) {
+                            kt1 = true;
+                            break;
+                        }
+                    }
+                    if (kt1) {
+                        MessageBox.getBox("Khách Hàng", "Tên khách hàng không đúng định dạng!!!",
+                                Alert.AlertType.INFORMATION).show();
+                    } else {
+                        String diachi = this.DiaChiText.getText();
+                        String dienthoai = this.DienThoaiText.getText();
+                        boolean kt = false;
+                        for (int i = 0; i < dienthoai.length(); i++) {
+                            int so = dienthoai.charAt(i);
+                            if (so < 48 || so > 57) {
+                                kt = true;
+                                break;
+                            }
+                        }
+                        if (dienthoai.length() != 10 || !dienthoai.substring(0, 1).equals("0") || kt) {
+                            MessageBox.getBox("Khách Hàng", "Số điện thoại không đúng định dạng!!!",
+                                    Alert.AlertType.INFORMATION).show();
+                        } else {
+                            LocalDate dateIns = this.NgaySinhKH.getValue();
+                            Instant instant = Instant.from(dateIns.atStartOfDay(ZoneId.systemDefault()));
+                            Date NgaySinh = Date.from(instant);
+                            KhachHangService.updateKhachHang(id, tenKhach, diachi, dienthoai, NgaySinh);
+                            MessageBox.getBox("Khách Hàng", "Sửa khách hàng thành công!!!",
+                                    Alert.AlertType.INFORMATION).show();
+                        }
+                    }
+                }
+
             } else {
                 MessageBox.getBox("Khách Hàng", " Không được sửa mã khách hàng!!!",
                         Alert.AlertType.ERROR).show();

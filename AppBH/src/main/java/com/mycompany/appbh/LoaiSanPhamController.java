@@ -107,30 +107,44 @@ public class LoaiSanPhamController implements Initializable{
         this.TenLoaiSPText.setText("");
         String idLoaiSP = this.idLoaiSPText.getText();
         List<LoaiSanPham> LoaiSP = LoaiSanPhamService.GetLoaiSanPhamByID(idLoaiSP);
-        if(LoaiSP.isEmpty())
-            MessageBox.getBox("Thông báo", "Không tìm thấy mã loại sản phẩm phù hợp!!!", 
+        if(this.idLoaiSPText.getText().isEmpty())
+        {
+            MessageBox.getBox("Nhân viên", "Bạn phải nhập dữ liệu cần tìm!!!",
                     Alert.AlertType.INFORMATION).show();
+        }
         else
         {
-            this.MaLoaiSanPham.setCellValueFactory(new PropertyValueFactory<LoaiSanPham, String>("MaLoaiSanPham"));
-            this.TenLoaiSanPham.setCellValueFactory(new PropertyValueFactory<LoaiSanPham, String>("TenLoaiSanPham"));
-            this.listLoaiSanPham.setItems(FXCollections.observableArrayList(LoaiSP));
+            if (LoaiSP.isEmpty())
+                MessageBox.getBox("Thông báo", "Không tìm thấy mã loại sản phẩm phù hợp!!!",
+                        Alert.AlertType.INFORMATION).show();
+            else {
+                this.MaLoaiSanPham.setCellValueFactory(new PropertyValueFactory<LoaiSanPham, String>("MaLoaiSanPham"));
+                this.TenLoaiSanPham.setCellValueFactory(new PropertyValueFactory<LoaiSanPham, String>("TenLoaiSanPham"));
+                this.listLoaiSanPham.setItems(FXCollections.observableArrayList(LoaiSP));
+            }
         }
+        
     }
     
     public void addLoaiSanPham() throws IOException{
         String name = this.TenLoaiSPText.getText();
-        LoaiSanPhamService s = new LoaiSanPhamService();
-        try {
-            s.addLoaiSanPham(name);
-            MessageBox.getBox("Question", "Thêm loại sản phẩm thành công!!!", 
+        if (name.trim().equals("")) {
+            MessageBox.getBox("Thông báo", "tên loại sản phẩm không được để trống!!!",
                     Alert.AlertType.INFORMATION).show();
-        } catch (SQLException ex) {
-            Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
-            MessageBox.getBox("Question", "Thêm loại sản phẩm thất bại!!!", 
-                    Alert.AlertType.ERROR).show();
+        } else {
+            LoaiSanPhamService s = new LoaiSanPhamService();
+            try {
+                s.addLoaiSanPham(name);
+                MessageBox.getBox("Question", "Thêm loại sản phẩm thành công!!!",
+                        Alert.AlertType.INFORMATION).show();
+            } catch (SQLException ex) {
+                Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
+                MessageBox.getBox("Question", "Thêm loại sản phẩm thất bại!!!",
+                        Alert.AlertType.ERROR).show();
+            }
+            App.setRoot("LoaiSanPham");
         }
-        App.setRoot("LoaiSanPham");
+
     }
     
     String IDTextBox = null;
@@ -159,14 +173,20 @@ public class LoaiSanPhamController implements Initializable{
     
     public void UpdateLoaiSanPham() throws IOException {
         try {
-            
+
             String id = this.idLoaiSPText.getText();
 
             if (id.equals(IDTextBox)) {
                 String name = this.TenLoaiSPText.getText();
-                LoaiSanPhamService.updateLoaiSanPham(id, name);
-                MessageBox.getBox("Loại sản phẩm", "Sửa loại sản phẩm thành công!!!",
-                        Alert.AlertType.INFORMATION).show();
+                if (name.trim().equals("")) {
+                    MessageBox.getBox("Thông báo", "tên loại sản phẩm không được để trống!!!",
+                            Alert.AlertType.INFORMATION).show();
+                } else {
+                    LoaiSanPhamService.updateLoaiSanPham(id, name);
+                    MessageBox.getBox("Loại sản phẩm", "Sửa loại sản phẩm thành công!!!",
+                            Alert.AlertType.INFORMATION).show();
+                }
+
             } else {
                 MessageBox.getBox("Loại sản phẩm", " Không được sửa mã loại sản phẩm!!!",
                         Alert.AlertType.ERROR).show();

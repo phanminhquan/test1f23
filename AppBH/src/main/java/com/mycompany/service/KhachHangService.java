@@ -74,7 +74,7 @@ public class KhachHangService {
     }
     }
     
-    public boolean addKhachHang(String name,String Sdt,String DiaChi,Date NgaySinh) throws SQLException{
+    public boolean addKhachHang(String name,String DiaChi,String Sdt,Date NgaySinh) throws SQLException{
         
         try(Connection conn = JdbcUtils.getConn()){
             int dem = 1;
@@ -86,8 +86,8 @@ public class KhachHangService {
             String id = Integer.toString(dem);
             stm.setString(1,id);
             stm.setString(2,name);
-            stm.setString(3,Sdt);
-            stm.setString(4,DiaChi);
+            stm.setString(4,Sdt);
+            stm.setString(3,DiaChi);
             Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String s = formatter.format(NgaySinh);
             stm.setString(5,s);
@@ -96,14 +96,14 @@ public class KhachHangService {
         }
     }
     
-    public static boolean updateKhachHang(String makhach, String name,String Sdt,String DiaChi,Date NgaySinh) throws SQLException{
+    public static boolean updateKhachHang(String makhach, String name,String DiaChi,String Sdt,Date NgaySinh) throws SQLException{
         
         try(Connection conn = JdbcUtils.getConn()){
             String sql = "update tblkhach set TenKhach = ? , DiaChi = ?, DienThoai = ?,NgaySinh = ? where  MaKhach = ?";
             PreparedStatement stm = conn.prepareCall(sql);        
              stm.setString(1,name);
-            stm.setString(2,Sdt);
-            stm.setString(3,DiaChi);
+            stm.setString(3,Sdt);
+            stm.setString(2,DiaChi);
             Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String s = formatter.format(NgaySinh);
             stm.setString(4,s);

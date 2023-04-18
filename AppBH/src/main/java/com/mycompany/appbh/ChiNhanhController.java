@@ -117,26 +117,46 @@ public class ChiNhanhController implements Initializable{
         this.TenChiNhanhText.setText("");
         String idChiNhanh = this.idChiNhanhText.getText();
         List<ChiNhanh> chiNhanh = new ArrayList<ChiNhanh>();
-        chiNhanh.add((ChiNhanhService.GetChiNhanhByID(idChiNhanh)));
-        this.id.setCellValueFactory(new PropertyValueFactory<ChiNhanh, Integer>("id"));
-        this.diachi.setCellValueFactory(new PropertyValueFactory<ChiNhanh, String>("DiaChi"));
-        this.listChiNhanh.setItems(FXCollections.observableArrayList(chiNhanh));
+        if(this.idChiNhanhText.getText().isEmpty())
+        {
+            MessageBox.getBox("Chi Nhánh", "Bạn phải nhập dữ liệu cần tìm!!!",
+                    Alert.AlertType.INFORMATION).show();
+        }
+        else
+        {
+            if (chiNhanh.isEmpty())
+                MessageBox.getBox("Thông báo", "Không tìm thấy mã chi nhánh phù hợp!!!",
+                        Alert.AlertType.INFORMATION).show();
+            else {
+                chiNhanh.add((ChiNhanhService.GetChiNhanhByID(idChiNhanh)));
+                this.id.setCellValueFactory(new PropertyValueFactory<ChiNhanh, Integer>("id"));
+                this.diachi.setCellValueFactory(new PropertyValueFactory<ChiNhanh, String>("DiaChi"));
+                this.listChiNhanh.setItems(FXCollections.observableArrayList(chiNhanh));
+            }
+        }
+        
     }
     
     public void addChiNhanh() throws IOException{
         String name = this.TenChiNhanhText.getText();
-        ChiNhanhService s = new ChiNhanhService();
-        try {
-            s.addChiNhanh(name);
-            MessageBox.getBox("Question", "Thêm chi nhánh thành công!!!", 
-                    Alert.AlertType.INFORMATION).show();
-        } catch (SQLException ex) {
-            Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
-            MessageBox.getBox("Question", "Thêm chi nhánh thất bại!!!", 
-                    Alert.AlertType.ERROR).show();
+        if(name.trim().equals(""))
+        {
+            MessageBox.getBox("Thông báo", "Vui lòng nhập đầy đủ thông tin!!!",
+                        Alert.AlertType.INFORMATION).show();
         }
-        App.setRoot("ChiNhanh");
-        
+        else {
+            ChiNhanhService s = new ChiNhanhService();
+            try {
+                s.addChiNhanh(name);
+                MessageBox.getBox("Question", "Thêm chi nhánh thành công!!!",
+                        Alert.AlertType.INFORMATION).show();
+            } catch (SQLException ex) {
+                Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
+                MessageBox.getBox("Question", "Thêm chi nhánh thất bại!!!",
+                        Alert.AlertType.ERROR).show();
+            }
+            App.setRoot("ChiNhanh");
+        }
         
     }
     
@@ -171,10 +191,18 @@ public class ChiNhanhController implements Initializable{
 
             if (id.equals(IDTextBox)) {
                 String name = this.TenChiNhanhText.getText();
-                int id1 = Integer.parseInt(id);
-                ChiNhanhService.updateChiNhanh(id1, name);
-                MessageBox.getBox("Chi nhánh", "Sửa chi nhánh thành công!!!",
+                if(name.trim().equals(""))
+                {
+                    MessageBox.getBox("Thông báo", "tên chi nhánh không được để trống!!!",
                         Alert.AlertType.INFORMATION).show();
+                }
+                else {
+                    int id1 = Integer.parseInt(id);
+                    ChiNhanhService.updateChiNhanh(id1, name);
+                    MessageBox.getBox("Chi nhánh", "Sửa chi nhánh thành công!!!",
+                            Alert.AlertType.INFORMATION).show();
+                }
+                
             } else {
                 MessageBox.getBox("Chi nhánh", " Không được sửa mã chi nhánh!!!",
                         Alert.AlertType.ERROR).show();

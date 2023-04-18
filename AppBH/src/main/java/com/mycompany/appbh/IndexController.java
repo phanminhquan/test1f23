@@ -58,6 +58,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 
@@ -104,6 +105,9 @@ public class IndexController implements Initializable {
     private TextField TongTienThanhToan;
     @FXML
     private TextField ThanhToan;
+    
+    @FXML
+    private Button thanhtoan;
 
     @FXML
     private TextField TienMat;
@@ -326,7 +330,8 @@ public class IndexController implements Initializable {
 
     @FXML
     public void AddITem() throws SQLException, Exception {
-
+        
+        this.thanhtoan.setDisable(false);
         Hang a = this.l.getValue();
         boolean isFound = false;
         for (Hang i : itemInContent) {
@@ -383,19 +388,30 @@ public class IndexController implements Initializable {
 
     @FXML
     public void DeleteItem() throws SQLException {
-        selectHang = this.content.getSelectionModel().getSelectedItem();
-
-        for (Hang i : itemInContent) {
-            if (i.equals(selectHang)) {
-                itemInContent.remove(i);
-                break;
+        try{
+            
+            selectHang = this.content.getSelectionModel().getSelectedItem();
+            if(this.selectHang == null)
+                throw new Exception();
+            for (Hang i : itemInContent) {
+                if (i.equals(selectHang)) {
+                    itemInContent.remove(i);
+                    break;
+                }
             }
+            this.TienMat.setText("0");
+            this.thoi.setText("0");
+            this.addListToTableView();
+            update();
+            this.content.refresh();
         }
-        this.TienMat.setText("0");
-        this.thoi.setText("0");
-        this.addListToTableView();
-        update();
-        this.content.refresh();
+        catch(Exception ex)
+        {
+            Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
+            MessageBox.getBox("Cảnh báo", "bạn chưa chọn sản phẩm để xóa",
+                    Alert.AlertType.ERROR).show();
+        }
+        
     }
 
     @FXML

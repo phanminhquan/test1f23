@@ -70,7 +70,6 @@ public class NhanVienService {
                NhanVien n = new NhanVien(rs.getString("MaNhanVien"), rs.getString("TenNhanVien"),rs.getString("GioiTinh"),rs.getString("DiaChi"),rs.getString("DienThoai"),rs.getDate("NgaySinh"),rs.getInt("idChiNhanh"),rs.getString("Password"));
                listNhanVien.add(n);
             }
-            NhanVien a = listNhanVien.get(0);
             return listNhanVien;
     }
     }

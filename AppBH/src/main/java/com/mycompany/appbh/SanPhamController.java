@@ -29,6 +29,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -49,7 +50,6 @@ public class SanPhamController implements Initializable{
     private ComboBox<KhuyenMai> ListKhuyenMai;
     @FXML
     private ComboBox<DonViTinh> ListDonViTinh;
-    
     
     @FXML
     public TableView<Hang> listSanPham;
@@ -191,57 +191,113 @@ public class SanPhamController implements Initializable{
         this.TenHangText.setText("");
         String idSanPham = this.MaHangText.getText();
         List<Hang> sanpham = SanPhamService.GetSanPhamByID(idSanPham);
-        this.MaHang.setCellValueFactory(new PropertyValueFactory<Hang, String>("MaHang"));
-        this.TenHang.setCellValueFactory(new PropertyValueFactory<Hang,String>("TenHang"));
-        this.MaLoaiSanPham.setCellValueFactory(new PropertyValueFactory<Hang,String>("MaLoaiSanPham"));
-        this.SoLuong.setCellValueFactory(new PropertyValueFactory<Hang,Double>("SoLuong"));
-        this.DonGiaNhap.setCellValueFactory(new PropertyValueFactory<Hang,Double>("DonGiaNhap"));
-        this.DonGiaBan.setCellValueFactory(new PropertyValueFactory<Hang,Double>("DonGiaBan"));
-        this.Anh.setCellValueFactory(new PropertyValueFactory<Hang,String>("Anh"));
-        this.GhiChu.setCellValueFactory(new PropertyValueFactory<Hang,String>("GhiChu"));
-        this.IdKhuyenMai.setCellValueFactory(new PropertyValueFactory<Hang,Integer>("IdKhuyenMai"));
-        this.DonViTinh.setCellValueFactory(new PropertyValueFactory<Hang,Integer>("DonViTinh"));
-        this.listSanPham.setItems(FXCollections.observableArrayList(sanpham));
+        if(this.MaHangText.getText().isEmpty())
+        {
+            MessageBox.getBox("Sản phẩm", "Bạn phải nhập dữ liệu cần tìm!!!",
+                    Alert.AlertType.INFORMATION).show();
+        }
+        else
+        {
+            if (sanpham.isEmpty())
+            {
+                MessageBox.getBox("Sản phẩm", "Không tìm thấy mã sản phẩm phù hợp!!!",
+                        Alert.AlertType.INFORMATION).show();
+            }
+            else {
+                this.MaHang.setCellValueFactory(new PropertyValueFactory<Hang, String>("MaHang"));
+                this.TenHang.setCellValueFactory(new PropertyValueFactory<Hang,String>("TenHang"));
+                this.MaLoaiSanPham.setCellValueFactory(new PropertyValueFactory<Hang,String>("MaLoaiSanPham"));
+                this.SoLuong.setCellValueFactory(new PropertyValueFactory<Hang,Double>("SoLuong"));
+                this.DonGiaNhap.setCellValueFactory(new PropertyValueFactory<Hang,Double>("DonGiaNhap"));
+                this.DonGiaBan.setCellValueFactory(new PropertyValueFactory<Hang,Double>("DonGiaBan"));
+                this.Anh.setCellValueFactory(new PropertyValueFactory<Hang,String>("Anh"));
+                this.GhiChu.setCellValueFactory(new PropertyValueFactory<Hang,String>("GhiChu"));
+                this.IdKhuyenMai.setCellValueFactory(new PropertyValueFactory<Hang,Integer>("IdKhuyenMai"));
+                this.DonViTinh.setCellValueFactory(new PropertyValueFactory<Hang,Integer>("DonViTinh"));
+                this.listSanPham.setItems(FXCollections.observableArrayList(sanpham));
+            }
+        }
+        
+        
     }
     
     public void SeacrhStaffByName() throws SQLException {
         this.MaHangText.setText("");
         String namesanpham = this.TenHangText.getText();
         List<Hang> sanpham = SanPhamService.GetSanPhamByName(namesanpham);
-        this.MaHang.setCellValueFactory(new PropertyValueFactory<Hang, String>("MaHang"));
-        this.TenHang.setCellValueFactory(new PropertyValueFactory<Hang,String>("TenHang"));
-        this.MaLoaiSanPham.setCellValueFactory(new PropertyValueFactory<Hang,String>("MaLoaiSanPham"));
-        this.SoLuong.setCellValueFactory(new PropertyValueFactory<Hang,Double>("SoLuong"));
-        this.DonGiaNhap.setCellValueFactory(new PropertyValueFactory<Hang,Double>("DonGiaNhap"));
-        this.DonGiaBan.setCellValueFactory(new PropertyValueFactory<Hang,Double>("DonGiaBan"));
-        this.Anh.setCellValueFactory(new PropertyValueFactory<Hang,String>("Anh"));
-        this.GhiChu.setCellValueFactory(new PropertyValueFactory<Hang,String>("GhiChu"));
-        this.IdKhuyenMai.setCellValueFactory(new PropertyValueFactory<Hang,Integer>("IdKhuyenMai"));
-        this.DonViTinh.setCellValueFactory(new PropertyValueFactory<Hang,Integer>("DonViTinh"));
-        this.listSanPham.setItems(FXCollections.observableArrayList(sanpham));
+        if(this.TenHangText.getText().isEmpty())
+        {
+            MessageBox.getBox("Sản phẩm", "Bạn phải nhập dữ liệu cần tìm!!!",
+                    Alert.AlertType.INFORMATION).show();
+        }
+        else
+        {
+            if (sanpham.isEmpty())
+            {
+                MessageBox.getBox("Sản phẩm", "Không tìm thấy tên sản phẩm phù hợp!!!",
+                        Alert.AlertType.INFORMATION).show();
+            }
+            else {
+                this.MaHang.setCellValueFactory(new PropertyValueFactory<Hang, String>("MaHang"));
+                this.TenHang.setCellValueFactory(new PropertyValueFactory<Hang,String>("TenHang"));
+                this.MaLoaiSanPham.setCellValueFactory(new PropertyValueFactory<Hang,String>("MaLoaiSanPham"));
+                this.SoLuong.setCellValueFactory(new PropertyValueFactory<Hang,Double>("SoLuong"));
+                this.DonGiaNhap.setCellValueFactory(new PropertyValueFactory<Hang,Double>("DonGiaNhap"));
+                this.DonGiaBan.setCellValueFactory(new PropertyValueFactory<Hang,Double>("DonGiaBan"));
+                this.Anh.setCellValueFactory(new PropertyValueFactory<Hang,String>("Anh"));
+                this.GhiChu.setCellValueFactory(new PropertyValueFactory<Hang,String>("GhiChu"));
+                this.IdKhuyenMai.setCellValueFactory(new PropertyValueFactory<Hang,Integer>("IdKhuyenMai"));
+                this.DonViTinh.setCellValueFactory(new PropertyValueFactory<Hang,Integer>("DonViTinh"));
+                this.listSanPham.setItems(FXCollections.observableArrayList(sanpham));
+            }
+        }
     }
     
     public void addSanPham() throws IOException{
         String TenHang = this.TenHangText.getText();
-        String MaLoaiSanPham = ListLoaiSanPham.getSelectionModel().getSelectedItem().getMaLoaiSanPham();
-        double SoLuong = Double.parseDouble(this.SoLuongText.getText());
-        double DonGiaNhap = Double.parseDouble(this.DongiaNhapText.getText());
-        double DonGiaBan = Double.parseDouble(this.DonGiaBanText.getText());
+        LoaiSanPham MaLoaiSanPham = ListLoaiSanPham.getSelectionModel().getSelectedItem();
+        String SoLuong = (this.SoLuongText.getText());
+        String DonGiaNhap = (this.DongiaNhapText.getText());
+        String DonGiaBan = (this.DonGiaBanText.getText());
         String Anh = this.AnhText.getText();
         String GhiChu = this.GhiChuText.getText();
-        int IdKhuyenMai = ListKhuyenMai.getSelectionModel().getSelectedItem().getID();
-        int DonViTinh = ListDonViTinh.getSelectionModel().getSelectedItem().getID();
-        SanPhamService s = new SanPhamService();
-        try {
-            s.addSanPham(TenHang, MaLoaiSanPham, SoLuong, DonGiaNhap, DonGiaBan, Anh,GhiChu,IdKhuyenMai,DonViTinh);
-            MessageBox.getBox("Question", "Thêm sản phẩm thành công!!!", 
+        KhuyenMai IdKhuyenMai = ListKhuyenMai.getSelectionModel().getSelectedItem();
+        DonViTinh DonViTinh = ListDonViTinh.getSelectionModel().getSelectedItem();
+        if (TenHang.trim().equals("") || MaLoaiSanPham == null || SoLuong == null || DonGiaBan == null || DonGiaNhap == null || IdKhuyenMai == null || DonViTinh == null) {
+            MessageBox.getBox("Thông báo", "Vui lòng nhập đầy đủ thông tin!!!",
                     Alert.AlertType.INFORMATION).show();
-        } catch (SQLException ex) {
-            Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
-            MessageBox.getBox("Question", "Thêm sản phẩm thất bại!!!", 
-                    Alert.AlertType.ERROR).show();
+        } else {
+            SanPhamService s = new SanPhamService();
+            if (Double.parseDouble(DonGiaNhap) > Double.parseDouble(DonGiaBan)) {
+                MessageBox.getBox("Sản phẩm", "Đơn giá nhập phải nhỏ hơn đơn giá bán!!!",
+                        Alert.AlertType.INFORMATION).show();
+            }
+            else if(Double.parseDouble(SoLuong) < 0 || Double.parseDouble(DonGiaNhap) < 0 ||  Double.parseDouble(DonGiaBan) < 0)
+            {
+                MessageBox.getBox("Sản phẩm", "không thể nhận giá trị âm!!!",
+                        Alert.AlertType.INFORMATION).show();
+            }
+            else {
+                try {
+                    s.addSanPham(TenHang, MaLoaiSanPham.getMaLoaiSanPham(), Double.parseDouble(SoLuong), Double.parseDouble(DonGiaNhap), Double.parseDouble(DonGiaBan), Anh, GhiChu, IdKhuyenMai.getID(), DonViTinh.getID());
+                    MessageBox.getBox("Question", "Thêm sản phẩm thành công!!!",
+                            Alert.AlertType.INFORMATION).show();
+                } catch (NumberFormatException ex) {
+                    Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
+                    MessageBox.getBox("Question", "Nhập sai định dạng!!!",
+                            Alert.AlertType.ERROR).show();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
+                    MessageBox.getBox("Question", "Thêm sản phẩm thất bại!!!",
+                            Alert.AlertType.ERROR).show();
+
+                }
+
+                App.setRoot("SanPham");
+            }
+
         }
-        App.setRoot("SanPham");
+
     }
     
     String IDTextBox = null;
@@ -269,21 +325,43 @@ public class SanPhamController implements Initializable{
 
             if (id.equals(IDTextBox)) {
                 String tenhang = this.TenHangText.getText();
-                String loaisanpham = ListLoaiSanPham.getSelectionModel().getSelectedItem().getMaLoaiSanPham();
-                Double soluong = Double.parseDouble(this.SoLuongText.getText());
-                Double dongianhap =Double.parseDouble(this.DongiaNhapText.getText());
-                Double dongiaban =Double.parseDouble(this.DonGiaBanText.getText());
+                LoaiSanPham loaisanpham = ListLoaiSanPham.getSelectionModel().getSelectedItem();
+                String soluong = this.SoLuongText.getText();
+                String dongianhap = this.DongiaNhapText.getText();
+                String dongiaban = this.DonGiaBanText.getText();
                 String anh = this.AnhText.getText();
                 String ghichu = this.GhiChuText.getText();
-                int idKhuyenMai = ListKhuyenMai.getSelectionModel().getSelectedItem().getID();
-                int DonViTinh = ListDonViTinh.getSelectionModel().getSelectedItem().getID();
-                SanPhamService.updateSanPham(id, tenhang, loaisanpham, soluong, dongianhap, dongiaban, anh, ghichu,idKhuyenMai,DonViTinh);
-                MessageBox.getBox("Sản phẩm", "Sửa nhân sản phẩm thành công!!!",
+                KhuyenMai idKhuyenMai = ListKhuyenMai.getSelectionModel().getSelectedItem();
+                DonViTinh DonViTinh = ListDonViTinh.getSelectionModel().getSelectedItem();
+                if (tenhang.trim().equals("") || loaisanpham == null || soluong == null || dongianhap == null || dongiaban == null || idKhuyenMai == null || DonViTinh == null) {
+                    MessageBox.getBox("Thông báo", "Vui lòng nhập đầy đủ thông tin!!!",
+                            Alert.AlertType.INFORMATION).show();
+                }
+                else if(Double.parseDouble(soluong) < 0 || Double.parseDouble(dongianhap) < 0 ||  Double.parseDouble(dongiaban) < 0)
+            {
+                MessageBox.getBox("Sản phẩm", "không thể nhận giá trị âm!!!",
                         Alert.AlertType.INFORMATION).show();
+            }
+                else {
+                    if (Double.parseDouble(dongianhap) > Double.parseDouble(dongiaban)) {
+                        MessageBox.getBox("Sản phẩm", "Đơn giá nhập phải nhỏ hơn đơn giá bán!!!",
+                                Alert.AlertType.INFORMATION).show();
+                    } else {
+                        SanPhamService.updateSanPham(id, tenhang, loaisanpham.getMaLoaiSanPham(), Double.parseDouble(soluong), Double.parseDouble(dongianhap), Double.parseDouble(dongiaban), anh, ghichu, idKhuyenMai.getID(), DonViTinh.getID());
+                        MessageBox.getBox("Sản phẩm", "Sửa nhân sản phẩm thành công!!!",
+                                Alert.AlertType.INFORMATION).show();
+                    }
+
+                }
+
             } else {
                 MessageBox.getBox("Sản phẩm", " Không được sửa mã sản phẩm!!!",
                         Alert.AlertType.ERROR).show();
             }
+        } catch (NumberFormatException ex) {
+            Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
+            MessageBox.getBox("Question", "Nhập sai định dạng!!!",
+                    Alert.AlertType.ERROR).show();
         } catch (SQLException ex) {
             Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
             MessageBox.getBox("Sản phẩm", "Sửa sản phẩm thất bại!!!",
