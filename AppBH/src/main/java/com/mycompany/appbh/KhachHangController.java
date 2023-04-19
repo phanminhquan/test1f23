@@ -4,6 +4,7 @@
  */
 package com.mycompany.appbh;
 
+import static com.mycompany.appbh.IndexController.LOCAL_DATE;
 import com.mycompany.pojo.KhachHang;
 import com.mycompany.pojo.UserSession;
 import com.mycompany.service.ChiNhanhService;
@@ -13,9 +14,12 @@ import com.mycompany.utils.MessageBox;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -31,6 +35,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import java.util.Date;
 
 /**
  *
@@ -130,9 +135,10 @@ public class KhachHangController implements Initializable {
         this.NgaySinh.setCellValueFactory(new PropertyValueFactory<KhachHang, Date>("NgaySinh"));
         this.getListKhachHang().setItems(FXCollections.observableArrayList(khachhang));
     }
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        
         try {
             this.addToTableList();
         } catch (SQLException ex) {
@@ -140,7 +146,15 @@ public class KhachHangController implements Initializable {
         }
 
     }
-
+    public Date removeTime(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        return cal.getTime();
+    }
     public void SeacrhCustomerByID() throws SQLException {
         this.TenKhachHang.setText("");
         String MaKhachHang = this.MaKhachHang.getText();
@@ -191,8 +205,13 @@ public class KhachHangController implements Initializable {
 
     }
 
+    
+    
     public void addKhachHang() throws IOException, SQLException {
         String name = this.TenKhachHang.getText();
+        
+        
+        
         if (name.trim().equals("") || this.DiaChiText.getText().trim().equals("") || this.DienThoaiText.getText().trim().equals("")) {
             MessageBox.getBox("Thông báo", "Vui lòng nhập đầy đủ thông tin!!!",
                     Alert.AlertType.INFORMATION).show();
@@ -229,18 +248,26 @@ public class KhachHangController implements Initializable {
                     LocalDate dateIns = this.NgaySinhKH.getValue();
                     Instant instant = Instant.from(dateIns.atStartOfDay(ZoneId.systemDefault()));
                     Date birth = Date.from(instant);
-                    KhachHangService s = new KhachHangService();
-                    try {
-                        s.addKhachHang(name, DiaChi, dienthoai, birth);
-                        MessageBox.getBox("Question", "Thêm khách hàng thành công!!!",
-                                Alert.AlertType.INFORMATION).show();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
-                        MessageBox.getBox("Question", "Thêm khách hàng thất bại!!!",
-                                Alert.AlertType.ERROR).show();
+                    Date today = new Date();
+                    
+                    if(birth.after(today) || removeTime(today).equals(removeTime(birth))){
+                         MessageBox.getBox("Khách Hàng", "Năm sinh không hợp lệ!!!",
+                            Alert.AlertType.INFORMATION).show();
                     }
-                    this.addToTableList();
-                    this.listKhachHang.refresh();
+                    else{
+                        KhachHangService s = new KhachHangService();
+                        try {
+                            s.addKhachHang(name, DiaChi, dienthoai, birth);
+                            MessageBox.getBox("Question", "Thêm khách hàng thành công!!!",
+                                    Alert.AlertType.INFORMATION).show();
+                        } catch (SQLException ex) {
+                            Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
+                            MessageBox.getBox("Question", "Thêm khách hàng thất bại!!!",
+                                    Alert.AlertType.ERROR).show();
+                        }
+                        this.addToTableList();
+                        this.listKhachHang.refresh();
+                    }
                 }
             }
         }
@@ -300,9 +327,19 @@ public class KhachHangController implements Initializable {
                             LocalDate dateIns = this.NgaySinhKH.getValue();
                             Instant instant = Instant.from(dateIns.atStartOfDay(ZoneId.systemDefault()));
                             Date NgaySinh = Date.from(instant);
+                            
+                           
+                            Date today = new Date();
+                    
+                    if(NgaySinh.after(today) || removeTime(today).equals(removeTime(NgaySinh))){
+                         MessageBox.getBox("Khách Hàng", "Năm sinh không hợp lệ!!!",
+                            Alert.AlertType.INFORMATION).show();
+                    }
+                    else{
                             KhachHangService.updateKhachHang(id, tenKhach, diachi, dienthoai, NgaySinh);
                             MessageBox.getBox("Khách Hàng", "Sửa khách hàng thành công!!!",
                                     Alert.AlertType.INFORMATION).show();
+                        }
                         }
                     }
                 }

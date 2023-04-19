@@ -55,7 +55,7 @@
           <TableColumn fx:id="tenSP" prefWidth="114.0" text="Tên sản phẩm" />
             <TableColumn fx:id="soLuong" prefWidth="67.0" text="Số lượng" />
             <TableColumn fx:id="DonGia" prefWidth="100.0" text="Đơn giá" />
-            <TableColumn fx:id="GiamGiaSP" prefWidth="101.0" text="Giảm giá" />
+            <TableColumn fx:id="GiamGiaSP" prefWidth="101.0" text="Giảm giá (%)" />
             <TableColumn fx:id="TongTien" text="Tổng tiền" />
         </columns>
       </TableView>
@@ -71,13 +71,14 @@
                   <Label layoutX="91.0" layoutY="118.0" opacity="0.7" text="Tên nhân viên" />
                   <TextField fx:id="TenNV" editable="false" layoutX="190.0" layoutY="114.0" prefHeight="25.0" prefWidth="230.0" />
                   <Label layoutX="90.0" layoutY="19.0" opacity="0.7" text="Chi nhánh" />
-                  <TextField fx:id="KhachHang" editable="false" layoutX="190.0" layoutY="148.0" prefHeight="25.0" prefWidth="230.0" text="Tìm tên khách hàng" />
+                  <TextField fx:id="KhachHang" editable="false" layoutX="190.0" layoutY="148.0" prefHeight="25.0" prefWidth="230.0" />
                   <Label layoutX="91.0" layoutY="152.0" opacity="0.7" text="Tên khách hàng" />
                   <Button layoutX="420.0" layoutY="148.0" mnemonicParsing="false" onMouseClicked="#load" prefHeight="25.0" prefWidth="47.0" text="Tìm">
                      <font>
                         <Font size="11.0" />
                      </font></Button>
                   <Label layoutX="3.0" opacity="0.5" text="Thông tin chung" />
+                  <Button layoutX="481.0" layoutY="148.0" mnemonicParsing="false" onAction="#deleteKhach" text="Xóa" />
                </children>
             </Pane>
             <Pane prefHeight="244.0" prefWidth="588.0" style="-fx-background-color: #CCFFFF;">

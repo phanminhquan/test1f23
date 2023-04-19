@@ -1,6 +1,7 @@
 com\mycompany\pojo\ChiTietHoaDonBan.class
 com\mycompany\conf\JdbcUtils.class
 com\mycompany\service\DonViTinhService.class
+com\mycompany\pojo\ThongKe.class
 com\mycompany\appbh\SecondaryController.class
 com\mycompany\service\ChiNhanhService.class
 com\mycompany\appbh\ChiNhanhController.class
@@ -13,6 +14,7 @@ com\mycompany\appbh\PrimaryController.class
 com\mycompany\appbh\SanPhamController.class
 com\mycompany\pojo\NhanVien.class
 com\mycompany\pojo\KhachHang.class
+com\mycompany\appbh\ThongKeController.class
 com\mycompany\pojo\LoaiSanPham.class
 com\mycompany\service\LoaiSanPhamService.class
 com\mycompany\service\KhachHangService.class
@@ -24,7 +26,9 @@ com\mycompany\utils\MessageBox.class
 com\mycompany\appbh\IndexController.class
 com\mycompany\pojo\Hang.class
 com\mycompany\pojo\KhuyenMai.class
+com\mycompany\service\ThongKeService.class
 com\mycompany\pojo\HoaDonBan.class
 com\mycompany\appbh\NhanVienController.class
+com\mycompany\appbh\HoaDonController.class
 com\mycompany\appbh\App.class
 com\mycompany\service\NhanVienService.class

@@ -126,7 +126,6 @@
                   </TableView>
                </children>
             </HBox>
-            <HBox prefHeight="73.0" prefWidth="857.0" />
          </children>
       </FlowPane>
    </content>

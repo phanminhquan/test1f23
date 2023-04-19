@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import static java.time.temporal.TemporalQueries.localDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -94,7 +95,15 @@ public class NhanVienController implements Initializable {
     private ComboBox<ChiNhanh> ListChiNhanh;
     
     
- 
+    public Date removeTime(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        return cal.getTime();
+    }
     
 
     @FXML
@@ -261,19 +270,27 @@ public class NhanVienController implements Initializable {
                         LocalDate dateIns = this.NgaySinhText.getValue();
                         Instant instant = Instant.from(dateIns.atStartOfDay(ZoneId.systemDefault()));
                         Date NgaySinh = Date.from(instant);
-                        int idChiNhanh = ListChiNhanh.getSelectionModel().getSelectedItem().getId();
+                        Date today = new Date();
 
-                        NhanVienService s = new NhanVienService();
-                        try {
-                            s.addNhanVien(name, GioiTinh, DiaChi, sdt, NgaySinh, idChiNhanh);
-                            MessageBox.getBox("Nhân viên", "Thêm nhân viên thành công!!!",
+                        if (NgaySinh.after(today) || removeTime(today).equals(removeTime(NgaySinh))) {
+                            MessageBox.getBox("Nhân viên", "Năm sinh không hợp lệ!!!",
                                     Alert.AlertType.INFORMATION).show();
-                        } catch (SQLException ex) {
-                            Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
-                            MessageBox.getBox("Nhân viên", "Thêm nhân viên thất bại!!!",
-                                    Alert.AlertType.ERROR).show();
                         }
-                        App.setRoot("NhanVien");
+                        else{
+                            int idChiNhanh = ListChiNhanh.getSelectionModel().getSelectedItem().getId();
+
+                            NhanVienService s = new NhanVienService();
+                            try {
+                                s.addNhanVien(name, GioiTinh, DiaChi, sdt, NgaySinh, idChiNhanh);
+                                MessageBox.getBox("Nhân viên", "Thêm nhân viên thành công!!!",
+                                        Alert.AlertType.INFORMATION).show();
+                            } catch (SQLException ex) {
+                                Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
+                                MessageBox.getBox("Nhân viên", "Thêm nhân viên thất bại!!!",
+                                        Alert.AlertType.ERROR).show();
+                            }
+                            App.setRoot("NhanVien");
+                        }
                     }
 
                 }
@@ -343,10 +360,19 @@ public class NhanVienController implements Initializable {
                                 LocalDate dateIns = this.NgaySinhText.getValue();
                                 Instant instant = Instant.from(dateIns.atStartOfDay(ZoneId.systemDefault()));
                                 Date NgaySinh = Date.from(instant);
+
+                                Date today = new Date();
+
+                                if (NgaySinh.after(today) || removeTime(today).equals(removeTime(NgaySinh))) {
+                                    MessageBox.getBox("Nhân viên", "Năm sinh không hợp lệ!!!",
+                                            Alert.AlertType.INFORMATION).show();
+                                }
+                                else{
                                 int idChiNhanh = ListChiNhanh.getSelectionModel().getSelectedItem().getId();
                                 NhanVienService.updateNhanVien(id, name, GioiTinh, DiaChi, sdt, NgaySinh, idChiNhanh);
                                 MessageBox.getBox("Nhân viên", "Sửa nhân viên thành công!!!",
                                         Alert.AlertType.INFORMATION).show();
+                                }
                             }
 
                         }

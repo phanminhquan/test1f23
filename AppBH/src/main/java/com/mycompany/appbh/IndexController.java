@@ -251,19 +251,52 @@ public class IndexController implements Initializable {
         double tong = 0, giamgia = 0, tongTienBanDau = 0;
         for (Hang i : itemInContent) {
             tongTienBanDau += i.getDonGiaBan() * i.getSoLuongBan();
+            giamgia += i.getDonGiaBan()*i.getGiaGiam()*i.getSoLuongBan()/100;
+        }
+        double after = tongTienBanDau - giamgia;
+        if (!this.KhachHang.getText().equals("")) {
+            double t = after * 0.05;
+            giamgia += t;
+            after -= t;
+        }
+        if(select!=null){
+            Date today = new Date();
+            Format formatter = new SimpleDateFormat("yyyy-MM-dd");
+            String stoday = formatter.format(today);
+            String birthS = formatter.format(select.getNgaySinh());
 
-            giamgia += i.getGiaGiam();
+            String ToDay = stoday.split("-")[2];
+            String ToMonth = stoday.split("-")[1];
+
+            String ToDayB = birthS.split("-")[2];
+            String ToMonthB = birthS.split("-")[1];
+            if (select != null && ToDay.equals(ToDayB) && ToMonth.equals(ToMonthB) && after >= 1000000) {
+                double t = after*0.1;
+                giamgia += t;
+
+                after -= t;
+            }
         }
-        Date today = new Date();
-        if (select != null && this.removeTime(today).equals(select.getNgaySinh()) && tongTienBanDau > 1000000) {
-            giamgia += tongTienBanDau * 0.1;
-        }
-        tong = tongTienBanDau - giamgia;
+        
+
+        if(tongTienBanDau - giamgia > 0)
+            tong = tongTienBanDau-giamgia;
+        else
+            tong =0;
         this.GiamGia.setText(Double.toString(giamgia));
         this.TongTienThanhToan.setText(Double.toString(tongTienBanDau));
         this.ThanhToan.setText(Double.toString(tong));
+        this.thoi.setText("");
+        this.TienMat.setText("");
     }
-
+    
+    @FXML
+    public void deleteKhach() throws SQLException{
+        this.KhachHang.setText("");
+        select=null;
+        update();
+    }
+    
     @FXML
     public void load(MouseEvent event) throws IOException, SQLException {
         FXMLLoader fl = new FXMLLoader();
@@ -279,9 +312,6 @@ public class IndexController implements Initializable {
                 select = c.getListKhachHang().getSelectionModel().getSelectedItem();
                 this.KhachHang.setText(select.getTenKhach());
                 update();
-            } else {
-                MessageBox.getBox("Cảnh báo", "Bạn chưa chọn khách hàng!!",
-                        Alert.AlertType.ERROR).show();
             }
 
         }
@@ -469,10 +499,17 @@ public class IndexController implements Initializable {
         try {
             double tienThanhToan = Double.parseDouble(this.ThanhToan.getText());
             double TienTra = Double.parseDouble(this.TienMat.getText());
-            if (TienTra > tienThanhToan) {
+            if(Double.parseDouble(this.TongTienThanhToan.getText()) ==0){
+                MessageBox.getBox("Cảnh báo", "Tiền cần thanh toán không thể bằng 0",
+                        Alert.AlertType.ERROR).show();
+            }
+            if (TienTra >= tienThanhToan) {
                 double tienthoi = TienTra - tienThanhToan;
                 this.thoi.setText(Double.toString(tienthoi));
-            } else {
+            }
+            
+                
+            else {
                 MessageBox.getBox("Cảnh báo", "Tiền mặt không đủ",
                         Alert.AlertType.ERROR).show();
             }
@@ -494,7 +531,14 @@ public class IndexController implements Initializable {
             }           
             if(Double.parseDouble(this.TienMat.getText()) == 0 || Double.parseDouble(this.thoi.getText()) == 0)
                 throw new Exception("Chưa thanh toán");
-            HoaDonBan currentHD = HoaDonService.addHoaDon(a.getMaNV(), NgayBanDate, select.getMaKhach(), Double.parseDouble(ThanhToan.getText()), a.getIDChiNhanh());
+                HoaDonBan currentHD = new HoaDonBan(); 
+            if(select!=null){
+                currentHD = HoaDonService.addHoaDon(a.getMaNV(), NgayBanDate, select.getMaKhach(), Double.parseDouble(ThanhToan.getText()), a.getIDChiNhanh());
+            }
+            else{
+                currentHD = HoaDonService.addHoaDon(a.getMaNV(), NgayBanDate, null, Double.parseDouble(ThanhToan.getText()), a.getIDChiNhanh());
+
+            }
             for (Hang i : itemInContent) {
                 HoaDonService.addHoaDonBan(currentHD, i.getMaHang(), i.getSoLuongBan(), i.getDonGiaBan(), Double.parseDouble(Integer.toString(i.getGiaGiam())), i.getTongGiaTien());
                 SanPhamService.updateSLHang(i.getMaHang(), i.getSoLuongBan());
@@ -502,15 +546,11 @@ public class IndexController implements Initializable {
             MessageBox.getBox("Thanh toán", "Thanh toán thành công!!!",
                     Alert.AlertType.INFORMATION).show();
             App.setRoot("index");
+            
         } catch (SQLException ex) {
             Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
             MessageBox.getBox("Thanh toán", "Thanh toán thất bại!!!",
                     Alert.AlertType.ERROR).show();
-        } catch (NullPointerException ex) {
-            Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
-            MessageBox.getBox("Thanh toán", "Chưa nhập khách hàng???!!!",
-                    Alert.AlertType.ERROR).show();
-
         } catch (Exception ex) {
             Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
             MessageBox.getBox("Thanh toán", ex.getMessage(),

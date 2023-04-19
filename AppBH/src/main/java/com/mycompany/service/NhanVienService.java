@@ -128,7 +128,7 @@ public class NhanVienService {
             stm.setString(2,GioiTinh);
             stm.setString(3,Diachi);
             stm.setString(4,sdt);
-             Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+             Format formatter = new SimpleDateFormat("yyyy-MM-dd");
             String s = formatter.format(ngaysinh);
             stm.setString(5,s);
             stm.setString(6,Integer.toString(idChiNhanh));

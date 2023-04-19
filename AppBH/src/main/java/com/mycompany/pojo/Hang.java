@@ -205,7 +205,9 @@ public class Hang {
      * @return the TongGiaTien
      */
     public double getTongGiaTien() throws SQLException {
-        return ((this.DonGiaBan) * this.getSoLuongBan()-this.getGiaGiam());
+        if((this.DonGiaBan) * this.getSoLuongBan()-this.getGiaGiam() > 0)
+            return ((this.DonGiaBan) * this.getSoLuongBan()-this.getGiaGiam()*(this.DonGiaBan) * this.getSoLuongBan()/100);
+        else return 0;
     }
 
     /**
@@ -219,7 +221,7 @@ public class Hang {
         var KM = KhuyenMaiService.KhuyenMaiByID(Integer.toString(this.IdKhuyenMai));
         Date today = new Date();
         if(KM.getNgayBatDau().before(today) && KM.getNgayKetThuc().after(today))
-            return KM.getGiaTri()*this.soLuongBan;
+            return KM.getGiaTri();
         else return 0;
     }
 
