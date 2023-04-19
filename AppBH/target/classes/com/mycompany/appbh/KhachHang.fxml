@@ -123,22 +123,17 @@
          <children>
             <Pane prefHeight="110.0" prefWidth="1100.0" style="-fx-background-color: #CCFFFF;">
                <children>
-                  <Button layoutX="881.0" layoutY="42.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="67.0" text="Lưu">
-                     <font>
-                        <Font name="Arial Bold" size="15.0" />
-                     </font>
-                  </Button>
                   <Button layoutX="986.0" layoutY="42.0" mnemonicParsing="false" onAction="#switchToTrangChu" prefHeight="27.0" prefWidth="67.0" text="Đóng">
                      <font>
                         <Font name="Arial Bold" size="15.0" />
                      </font>
                   </Button>
-                  <Button layoutX="671.0" layoutY="42.0" mnemonicParsing="false" onAction="#deleteKhachHang" prefHeight="27.0" prefWidth="67.0" text="Xóa">
+                  <Button disable="true" layoutX="760.0" layoutY="42.0" mnemonicParsing="false" onAction="#deleteKhachHang" prefHeight="27.0" prefWidth="67.0" text="Xóa" fx:id="xoa">
                      <font>
                         <Font name="Arial Bold" size="15.0" />
                      </font>
                   </Button>
-                  <Button layoutX="775.0" layoutY="42.0" mnemonicParsing="false" onAction="#UpdateKhachHang" prefHeight="27.0" prefWidth="67.0" text="Sửa">
+                  <Button fx:id="sua" disable="true" layoutX="872.0" layoutY="42.0" mnemonicParsing="false" onAction="#UpdateKhachHang" prefHeight="27.0" prefWidth="67.0" text="Sửa">
                      <font>
                         <Font name="Arial Bold" size="15.0" />
                      </font>

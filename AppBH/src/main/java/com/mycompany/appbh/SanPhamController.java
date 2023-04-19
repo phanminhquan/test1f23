@@ -53,7 +53,10 @@ public class SanPhamController implements Initializable{
     
     @FXML
     public TableView<Hang> listSanPham;
-    
+    @FXML
+    private Button xoa;
+    @FXML
+    private Button sua;
     
     @FXML
     private TableColumn<Hang, String> MaHang;
@@ -163,6 +166,7 @@ public class SanPhamController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
+            
             List<Hang> hang = SanPhamService.GetSanPham();
             this.MaHang.setCellValueFactory(new PropertyValueFactory<Hang,String>("MaHang"));
             this.TenHang.setCellValueFactory(new PropertyValueFactory<Hang,String>("TenHang"));
@@ -316,6 +320,8 @@ public class SanPhamController implements Initializable{
         this.ListLoaiSanPham.setValue(LoaiSanPhamService.GetLoaiSanPhamByID(a.getMaLoaiSanPham()).get(0));
         this.ListKhuyenMai.setValue(KhuyenMaiService.KhuyenMaiByID(Integer.toString(a.getIdKhuyenMai())));
         IDTextBox = a.getMaHang();
+        this.xoa.setDisable(false);
+        this.sua.setDisable(false);
     }
 
     public void UpdateSanPham() throws IOException {

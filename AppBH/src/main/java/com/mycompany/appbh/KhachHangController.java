@@ -36,6 +36,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import java.util.Date;
+import javafx.scene.control.Button;
 
 /**
  *
@@ -54,7 +55,10 @@ public class KhachHangController implements Initializable {
 
     @FXML
     private TableColumn<KhachHang, String> MaKhach;
-
+    @FXML
+    private Button xoa;
+    @FXML
+    private Button sua;
     @FXML
     private TableColumn<KhachHang, String> TenKhach;
 
@@ -140,6 +144,7 @@ public class KhachHangController implements Initializable {
         
         
         try {
+            
             this.addToTableList();
         } catch (SQLException ex) {
             Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
@@ -285,6 +290,8 @@ public class KhachHangController implements Initializable {
         this.DienThoaiText.setText(a.getDienThoai());
         this.NgaySinhKH.setValue(LocalDate.parse(a.getNgaySinh().toString()));
         IDTextBox = a.getMaKhach();
+        this.xoa.setDisable(false);
+        this.sua.setDisable(false);
     }
 
     public void UpdateKhachHang() throws IOException {

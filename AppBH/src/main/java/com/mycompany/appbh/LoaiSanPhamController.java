@@ -19,6 +19,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -32,7 +33,10 @@ import javafx.scene.input.MouseEvent;
 public class LoaiSanPhamController implements Initializable{
     @FXML
     private TableView<LoaiSanPham> listLoaiSanPham;
-    
+    @FXML
+    private Button xoa;
+    @FXML
+    private Button sua;
     
     @FXML
     private TableColumn<LoaiSanPham, String> MaLoaiSanPham;
@@ -93,6 +97,7 @@ public class LoaiSanPhamController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
+            
             List<LoaiSanPham> loaisanpham = LoaiSanPhamService.GetLoaiSanPham();
             this.MaLoaiSanPham.setCellValueFactory(new PropertyValueFactory<LoaiSanPham,String>("MaLoaiSanPham"));
             this.TenLoaiSanPham.setCellValueFactory(new PropertyValueFactory<LoaiSanPham,String>("TenLoaiSanPham"));
@@ -155,6 +160,8 @@ public class LoaiSanPhamController implements Initializable{
         this.idLoaiSPText.setText(a.getMaLoaiSanPham());
         this.TenLoaiSPText.setText(a.getTenLoaiSanPham());
         IDTextBox = a.getMaLoaiSanPham();
+        this.xoa.setDisable(false);
+        this.sua.setDisable(false);
     }
     public void deleteLoaiSanPham() throws IOException {
         

@@ -47,7 +47,12 @@ public class NhanVienController implements Initializable {
 
     @FXML
     private TableView<NhanVien> listNhanVien;
-
+    
+    @FXML
+    private Button xoa;
+    @FXML
+    private Button sua;
+    
     @FXML
     private TableColumn<NhanVien, String> id;
 
@@ -154,6 +159,7 @@ public class NhanVienController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         try {
+            
             List<NhanVien> nhanvien = NhanVienService.GetNhanVien();
             this.id.setCellValueFactory(new PropertyValueFactory<NhanVien, String>("MaNV"));
             this.TenNhanVien.setCellValueFactory(new PropertyValueFactory<NhanVien, String>("TenNV"));
@@ -312,6 +318,8 @@ public class NhanVienController implements Initializable {
         this.NgaySinhText.setValue(LocalDate.parse(a.getNgaySinh().toString()));
         this.ListChiNhanh.setValue(ChiNhanhService.GetChiNhanhByID(Integer.toString(a.getIDChiNhanh())));
         IDTextBox = a.getMaNV();
+        this.xoa.setDisable(false);
+        this.sua.setDisable(false);
     }
 
     public void UpdateNhanVien() throws IOException {

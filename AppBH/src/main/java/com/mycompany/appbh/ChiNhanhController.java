@@ -40,7 +40,10 @@ import javafx.scene.input.MouseEvent;
 public class ChiNhanhController implements Initializable{
     @FXML
     private TableView<ChiNhanh> listChiNhanh;
-    
+    @FXML
+    private Button xoa;
+    @FXML
+    private Button sua;
     
     @FXML
     private TableColumn<ChiNhanh, Integer> id;
@@ -103,6 +106,7 @@ public class ChiNhanhController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
+            
             List<ChiNhanh> chinhanh = ChiNhanhService.GetChiNhanh();
             this.id.setCellValueFactory(new PropertyValueFactory<ChiNhanh,Integer>("id"));
             this.diachi.setCellValueFactory(new PropertyValueFactory<ChiNhanh,String>("DiaChi"));
@@ -168,6 +172,8 @@ public class ChiNhanhController implements Initializable{
         this.idChiNhanhText.setText(Integer.toString(a.getId()));
         this.TenChiNhanhText.setText(a.getDiaChi());
         IDTextBox = Integer.toString(a.getId());
+        this.xoa.setDisable(false);
+        this.sua.setDisable(false);
     }
     public void deleteChiNhanh() throws IOException {
         

@@ -163,12 +163,12 @@
                         <Font name="Arial Bold" size="15.0" />
                      </font>
                   </Button>
-                  <Button layoutX="799.0" layoutY="37.0" mnemonicParsing="false" onAction="#deleteSanPham" prefHeight="27.0" prefWidth="67.0" text="Xóa">
+                  <Button disable="true" layoutX="799.0" layoutY="37.0" mnemonicParsing="false" onAction="#deleteSanPham" prefHeight="27.0" prefWidth="67.0" text="Xóa" fx:id="xoa">
                      <font>
                         <Font name="Arial Bold" size="15.0" />
                      </font>
                   </Button>
-                  <Button layoutX="898.0" layoutY="37.0" mnemonicParsing="false" onAction="#UpdateSanPham" prefHeight="27.0" prefWidth="67.0" text="Sửa">
+                  <Button fx:id="sua" disable="true" layoutX="898.0" layoutY="37.0" mnemonicParsing="false" onAction="#UpdateSanPham" prefHeight="27.0" prefWidth="67.0" text="Sửa">
                      <font>
                         <Font name="Arial Bold" size="15.0" />
                      </font>
