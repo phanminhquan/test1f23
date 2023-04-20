@@ -225,7 +225,7 @@ public class NhanVienController implements Initializable {
         }
         
     }
-
+    //aaaaa
     public void addNhanVien() throws IOException {
         String sdt = this.SoDienThoaihText.getText();
         String name = this.nameNhanVien.getText();
