@@ -1,17 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: TestNhanVien
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.194 sec <<< FAILURE!
-TestNhanVien.testGetStaff()  Time elapsed: 0.042 sec  <<< FAILURE!
-java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129)
-	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
-	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:824)
-	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:444)
-	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:237)
-	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:198)
-	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:683)
-	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:230)
-	at com.mycompany.conf.JdbcUtils.getConn(JdbcUtils.java:27)
-	at TestNhanVien.testGetStaff(TestNhanVien.java:57)
-
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.31 sec

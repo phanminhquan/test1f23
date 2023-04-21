@@ -91,7 +91,7 @@ public class SanPhamService {
             Statement stm1 = conn.createStatement();
            
             ResultSet rs = stm1.executeQuery("SELECT * FROM tblhang");
-            while(rs.next()) dem++;
+            while(rs.next()) dem = Integer.parseInt(rs.getString("MaHang").substring(1))+1;
             String sql = "insert into tblhang values(?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement stm = conn.prepareCall(sql);
             String id = "H"+ Integer.toString(dem);

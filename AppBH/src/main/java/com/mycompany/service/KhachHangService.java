@@ -80,7 +80,7 @@ public class KhachHangService {
             int dem = 1;
             Statement stm1 = conn.createStatement();
             ResultSet rs = stm1.executeQuery("SELECT * FROM tblkhach");
-            while(rs.next()) dem++;
+            while(rs.next()) dem = Integer.parseInt(rs.getString("MaKhach"))+1;
             String sql = "insert into tblkhach values(?,?,?,?,?)";
             PreparedStatement stm = conn.prepareCall(sql);
             String id = Integer.toString(dem);

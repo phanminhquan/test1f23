@@ -39,10 +39,12 @@ public class TestNhanVien {
     
     @BeforeAll
     public void bfa(){
+        
     }
     
     @AfterAll
     public void afa(){
+        
     }
 //    
 //    @Test
@@ -51,6 +53,20 @@ public class TestNhanVien {
 //        Assertions.assertTrue(t == 0);
 //    }
 //    
+    
+    @Test
+    public void testLogin() throws SQLException{
+       
+         try ( Connection conn = JdbcUtils.getConn()) {           
+           String tentk = "nv1";
+           String pw =  "123";
+           int kq = NhanVienService.Login(tentk, pw);
+           Assertions.assertTrue(kq== 1);
+          }
+        }
+        
+         
+    
     @Test
     public void testGetStaff() throws SQLException{
        List<NhanVien> listNhanVien = new ArrayList<>();

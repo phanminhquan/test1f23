@@ -97,7 +97,7 @@
                   <Label layoutX="92.0" layoutY="166.0" opacity="0.7" text="Giảm giá" />
                   <Label layoutX="9.0" layoutY="6.0" opacity="0.5" text="Thông tin sản phẩm" />
                   <Button layoutX="482.0" layoutY="197.0" mnemonicParsing="false" onAction="#updateSoLuong" prefHeight="25.0" prefWidth="92.0" text="Xác nhận" />
-                  <Label fx:id="DV" layoutX="294.0" layoutY="90.0" prefHeight="25.0" prefWidth="21.0" />
+                  <Label fx:id="DV" layoutX="294.0" layoutY="90.0" prefHeight="25.0" prefWidth="54.0" />
                   <Label layoutX="363.0" layoutY="197.0" opacity="0.5" prefHeight="25.0" prefWidth="21.0" text="vnđ" />
                </children>
             </Pane>

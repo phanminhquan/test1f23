@@ -254,11 +254,6 @@ public class IndexController implements Initializable {
             giamgia += i.getDonGiaBan()*i.getGiaGiam()*i.getSoLuongBan()/100;
         }
         double after = tongTienBanDau - giamgia;
-        if (!this.KhachHang.getText().equals("")) {
-            double t = after * 0.05;
-            giamgia += t;
-            after -= t;
-        }
         if(select!=null){
             Date today = new Date();
             Format formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -276,8 +271,12 @@ public class IndexController implements Initializable {
 
                 after -= t;
             }
+            if (!this.KhachHang.getText().equals("")) {
+            double t = after * 0.05;
+            giamgia += t;
+            after -= t;
         }
-        
+        }
 
         if(tongTienBanDau - giamgia > 0)
             tong = tongTienBanDau-giamgia;
@@ -471,19 +470,25 @@ public class IndexController implements Initializable {
     public void updateSoLuong() throws SQLException, Exception {
         try {
             int SoLuong = Integer.parseInt(this.InfoSoLuong.getText());
-            for (Hang i : itemInContent) {
-                if (i.equals(selectHang)) {
-                    Hang checkSL = SanPhamService.GetSanPhamByID(i.getMaHang()).get(0);
-                    if (checkSL.getSoLuong() >= SoLuong) {
-                        i.setSoLuongBan(SoLuong);
-                    } else {
-                        throw new Exception("Hàng còn lại trong kho không đủ. Còn lại: " + checkSL.getSoLuong());
-                    }
-                    break;
-                }
+            if(SoLuong <= 0){
+                MessageBox.getBox("Cảnh báo", "Nhập số lượng không hợp lệ",
+                    Alert.AlertType.ERROR).show();
             }
-            update();
-            this.content.refresh();
+            else{
+                for (Hang i : itemInContent) {
+                    if (i.equals(selectHang)) {
+                        Hang checkSL = SanPhamService.GetSanPhamByID(i.getMaHang()).get(0);
+                        if (checkSL.getSoLuong() >= SoLuong) {
+                            i.setSoLuongBan(SoLuong);
+                        } else {
+                            throw new Exception("Hàng còn lại trong kho không đủ. Còn lại: " + checkSL.getSoLuong());
+                        }
+                        break;
+                    }
+                }
+                update();
+                this.content.refresh();
+            }
         } catch (NumberFormatException ex) {
             Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
             MessageBox.getBox("Sai định dạng", "Số lượng bãn nhập không đúng định dạng!!",

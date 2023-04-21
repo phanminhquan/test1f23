@@ -61,7 +61,7 @@ public class LoaiSanPhamService {
             Statement stm1 = conn.createStatement();
            
             ResultSet rs = stm1.executeQuery("SELECT * FROM tblloaisanpham");
-            while(rs.next()) dem++;
+            while(rs.next()) dem = Integer.parseInt(rs.getString("MaLoaiSanPham").substring(2))+1;
             String sql = "insert into tblloaisanpham values(?,?)";
             PreparedStatement stm = conn.prepareCall(sql);
             String id = "SP"+ Integer.toString(dem);

@@ -35,8 +35,8 @@ public class PrimaryController {
     
     @FXML
      private void switchToIndex() throws IOException, SQLException {
-         String id = txtA.getText();
-         String pw = txtB.getText();
+         String id = txtA.getText().trim();
+         String pw = txtB.getText().trim();
          if(NhanVienService.Login(id, pw) == 1){
              UserSession.getInstace(id);
              App.setRoot("index");
